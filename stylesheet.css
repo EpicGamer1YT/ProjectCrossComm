@@ -1,3 +1,39 @@
 .unimportant {
     /* This is for critical elements that should not be touched without asking*/
 }
+/* Fonts from Google Fonts - more at https://fonts.google.com */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+body {
+    background-color: #9fffc8;
+    font-family: "Open Serif", sans-serif;
+    padding: 0 14px 5px 0px;
+    font-size: 20px;
+    margin: 0;
+    color: #404040;
+}
+
+h1 {
+    padding:0px 5px 0px 700px;
+    font-family: "Arial", serif;
+    font-size: 32px;
+    font-weight: 500;
+}
+h2{
+    background-color: #9fffc8;
+    font-family: "Arial", sans-serif;
+    padding: 14px 5px 0 718px;
+    font-size: 20px;
+    margin: 0px;
+    color: #404040;
+    font-stretch:ultra-condensed;
+}
+img{
+    padding: 14px 5px 0 718px;
+}
+p1{
+    padding: 5px 9px 5px 10px
+
+
+
