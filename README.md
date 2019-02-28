@@ -1,2 +1,2 @@
 #ProjectCrossComm
-This is the midori branch for ProjectCrossComm. This is for Node.js backend.
+This is the baileys branch for Project CrossComm, for JS fullstack and HTML frontend development.
