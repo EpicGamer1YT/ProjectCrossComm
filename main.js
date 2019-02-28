@@ -1,6 +1,5 @@
 //Don't break this please
-var wikibutton = Document.getElementById(wikibutton);
-
-if (wikibutton.onclick) {
-    Document.getElementById(wikibutton).innerHTML="You clicked the button! Congrats, you plebeian.";
-}
+Document.getElementById("wikibutton").onclick = function() {
+    Document.getElementById("wikibutton").innerHTML = "Congrats, you clicked the button. Plebeian.";
+    alert("You're an idiot.")
+};
