@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
 body {
-    background-color: #000000;
+    background-color: DodgerBlue;
     font-family: "Open Serif", sans-serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
@@ -52,6 +52,21 @@ h4{
     margin-left: 800px;
     margin-right: 1035px;
 
+}
+#desc {
+    color: DodgerBlue;
+    font-family: Arial, serif;
+    font-stretch: semi-expanded;
+    border-style: dotted;
+    margin-left: 55px;
+}
+
+.signup {
+    color: white;
+    background-color: DodgerBlue;
+}
+#link {
+    color: black;
 }
 
 
