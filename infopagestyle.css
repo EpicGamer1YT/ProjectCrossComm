@@ -1,2 +1,15 @@
 /*This is the stylesheet for Ben's info page, because it looks ugly and disgusting.*/
 /*TODO: Make Ben's page look halfway decent*/
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: Arial, serif;
+    color: black;
+}
+#title, #subtitle {
+    text-align: center;
+}
+.people {
+    font-family: Arial, serif;
+    color: black;
+    
+}
