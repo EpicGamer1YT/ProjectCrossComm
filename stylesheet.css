@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 .unimportant {
     /* This is for critical elements that should not be touched without asking*/
 }
 /* Fonts from Google Fonts - more at https://fonts.google.com */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
-@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
 body {
     background-color: #9fffc8;
@@ -32,8 +32,20 @@ h2{
 img{
     padding: 14px 5px 0 718px;
 }
-p1{
+p1 {
     padding: 5px 9px 5px 10px
+}
+#desc {
+    color: tomato;
+    font-family: "Arial", serif;
+    font-stretch: semi-expanded;
+    border-style: dotted;
+    margin-left: 55px;
+
+}
+#subtitle {
+    color: green;
+}
 
 
 
