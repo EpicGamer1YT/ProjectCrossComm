@@ -11,4 +11,4 @@ Connor McDermid
 
 To contact us please email:  
 connor.mcdermid@mcvts.org
-The website link is (https://epicgamer1yt.github.io/ProjectCrossComm/) [here]
+The website link is [here](https://epicgamer1yt.github.io/ProjectCrossComm)
