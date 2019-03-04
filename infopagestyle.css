@@ -23,3 +23,7 @@ table, tr, th {
     padding: 3px;
     border-spacing: 5px;
 }
+#bottombar {
+    background-color: black;
+    font-family: "Times New Roman", serif;
+}
