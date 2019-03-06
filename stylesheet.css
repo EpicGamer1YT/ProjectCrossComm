@@ -69,5 +69,14 @@ h4{
 #link {
     color: black;
 }
+#hiddenaccountcreation {
+    display: none;
+}
+#hiddensignin {
+    display: none;
+}
+html {
+    alignment: center;
+}
 
 

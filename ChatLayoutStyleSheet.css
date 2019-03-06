@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+body {
+    background-color: DodgerBlue;
+    font-family: "Open Serif", sans-serif;
+    padding: 0 14px 5px 0px;
+    font-size: 20px;
+    margin: 0;
+    color: #404040;
+}
+#title {
+    background-color: black;
+    font-family: "Arial", sans-serif;
+    padding: 15px 5px 0 718px;
+    font-size: 20px;
+    margin: 0px;
+
+}
+#type {
+    display: block;
+    width: 100%;
+    text-align: center;
+}

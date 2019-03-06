@@ -2,6 +2,35 @@
 <!--suppress HtmlRequiredLangAttribute -->
 <html>
     <head>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
+                authDomain: "projectcrosscomm.firebaseapp.com",
+                databaseURL: "https://projectcrosscomm.firebaseio.com",
+                projectId: "projectcrosscomm",
+                storageBucket: "projectcrosscomm.appspot.com",
+                messagingSenderId: "412861101382"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <!-- Firebase App is always required and must be first -->
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
+
+        <!-- Add additional services that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-functions.js"></script>
+
+        <!-- Comment out (or don't include) services that you don't want to use -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-storage.js"></script> -->
+
+
+        <script src="main.js" rel="script"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project Cross Comm!</title>
@@ -15,10 +44,45 @@
         <img height="200px" src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg" width="260px" alt="If you can't see this image you're a pleb">
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
-        <a id="link" href="InfoPage.html">Click here for more information.</a>
+        <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
+        <div id="hiddenaccountcreation">
+            <form>
+                <fieldset>
+                    <legend>Account Creation</legend>
+                    <p>
+                        <label for="emailinput">Email</label>
+                        <input type="email" id="emailinput" value="">
+                    </p>
+                    <p>
+                        <label for="passinput">Password</label>
+                        <input type="password" id="passinput" value="secret">
+                    </p>
+                    <button id="submit" onclick="submitAcc()">SUBMIT</button>
+                </fieldset>
+            </form>
+        </div>
+        <button id="signin" onclick="showsignin()">Already have an account?</button>
+        <div id="hiddensignin">
+            <form>
+                <fieldset>
+                    <legend>Sign In</legend>
+                    <p>
+                        <label for="emailreauth">Email</label>
+                        <input type="email" id="emailreauth" value="">
+                    </p>
+                    <p>
+                        <label for="passreauth">Password</label>
+                        <input type="password" id="passreauth" value="">
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <div id="getthisblockoutofmygoddamnedway">
+            <a id="link" href="InfoPage.html">Click here for more information.</a>
+        </div>
     </body>
     <footer>
-        <script src="main.js" rel="script"></script>
+
         <noscript>Man, sucks for you! We only support modern, functioning browsers.</noscript>
     </footer>
 </html>
