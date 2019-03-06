@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:io' show Platform;
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  final FirebaseApp app = await FirebaseApp.configure(
+    name: 'db',
+    options: Platform.isIOS
+        ? const FirebaseOptions(
+      googleAppID: '1:412861101382:ios:fc550f5ccb3e419d',
+      gcmSenderID: '412861101382',
+      databaseURL: 'https://projectcrosscomm.firebaseio.com',
+    )
+        : const FirebaseOptions(
+      googleAppID: '1:412861101382:android:fc550f5ccb3e419d',
+      apiKey: 'AIzaSyAdwFoezBaL2HylhnFDQsZZ0kPbpALjeqo',
+      databaseURL: 'https://projectcrosscomm.firebaseio.com',
+    ),
+  );
+  runApp(MyApp(app: app,));
+}
 
 class MyApp extends StatelessWidget {
+  MyApp({Key key, this.app}) : super(key: key);
+  final FirebaseApp app;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,16 +42,17 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
         backgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.black,
         buttonColor: Colors.blue,
         textTheme: TextTheme(title: TextStyle(color: Colors.white), subtitle: TextStyle(color: Colors.white)),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page', app: app),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.app}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -41,6 +64,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  final FirebaseApp app;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -57,11 +81,17 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
+      database.reference().child("test").set(_counter);
+      print("set");
     });
   }
 
   @override
   Widget build(BuildContext context) {
+//    final FirebaseDatabase database = FirebaseDatabase(app: widget.app);
+//    database.reference().child("test").set("HI");
+//    print("set");
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -96,10 +126,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
+              style: Theme.of(context).textTheme.subtitle,
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.title,
             ),
           ],
         ),
