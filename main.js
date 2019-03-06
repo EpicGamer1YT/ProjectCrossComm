@@ -7,6 +7,7 @@ var config = {
     storageBucket: "projectcrosscomm.appspot.com",
     messagingSenderId: "412861101382"
 };
+import "https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js";
 firebase.initializeApp(config);
 function showAccCreate() {
     var x = document.getElementById("hiddenaccountcreation");
@@ -18,17 +19,17 @@ function showAccCreate() {
 }
 function submitAcc() {
     var email = document.getElementById("emailinput").value;
-    var pass = document.getElementById("passinput").value;
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function (error) {
+    var password = document.getElementById("passinput").value;
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
        console.log(error.log);
        console.log(error.message);
     });
 }
 function showsignin() {
     var x = document.getElementById("hiddensignin");
-    if (x.style.display === none) {
-        x.style.display = block;
+    if (x.style.display === "none") {
+        x.style.display = "block";
     } else {
-        x.style.display = none;
+        x.style.display = "none";
     }
 }

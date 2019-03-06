@@ -72,5 +72,11 @@ h4{
 #hiddenaccountcreation {
     display: none;
 }
+#hiddensignin {
+    display: none;
+}
+html {
+    alignment: center;
+}
 
 
