@@ -7,7 +7,6 @@ var config = {
     storageBucket: "projectcrosscomm.appspot.com",
     messagingSenderId: "412861101382"
 };
-import "https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js";
 firebase.initializeApp(config);
 function showAccCreate() {
     var x = document.getElementById("hiddenaccountcreation");
