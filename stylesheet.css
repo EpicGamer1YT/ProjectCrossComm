@@ -5,17 +5,42 @@
     /* This is for critical elements that should not be touched without asking*/
 }
 /* Fonts from Google Fonts - more at https://fonts.google.com */
+button{
 
+    background-color: DodgerBlue; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 615px;
+}
+button2{
+
+    background-color: Red; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32.011px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    width: 612px;
+}
 body {
-    background-color: DodgerBlue;
-    font-family: "Open Serif", sans-serif;
-    padding: 0 14px 5px 0px;
+    background-color: black;
+    font-family: "Arialf", sans-serif;
+    padding: 0px 14px 5px 0px;
     font-size: 20px;
     margin: 0;
     color: #404040;
 }
 h12{
-    background-color: DodgerBlue;
+
 
 }
 h1 {
@@ -24,9 +49,9 @@ h1 {
     font-size: 32px;
     font-weight: 500;
     margin-top: 100px;
+    color:white;
 }
 h2{
-    background-color: #000000;
     font-family: "Arial", sans-serif;
     padding: 14px 5px 0 718px;
     font-size: 20px;
@@ -35,7 +60,8 @@ h2{
     font-stretch:ultra-condensed;
 }
 img{
-    padding: 14px 5px 0 718px;
+    padding: 15px 3000px 0px 718px;
+
 
 }
 p1 {
@@ -48,6 +74,10 @@ p2{
 
 
 }
+p9{
+
+
+}
 h4{
     margin-top: 50px;
     margin-left: 800px;
@@ -55,11 +85,12 @@ h4{
 
 }
 #desc {
-    color: DodgerBlue;
+    color: white;
     font-family: Arial, serif;
     font-stretch: semi-expanded;
-    border-style: dotted;
     margin-left: 55px;
+    padding: 0px 40px 80px 120px;
+    background-color: black;
 }
 
 .signup {
@@ -69,5 +100,3 @@ h4{
 #link {
     color: black;
 }
-
-

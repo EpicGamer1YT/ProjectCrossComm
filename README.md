@@ -4,7 +4,7 @@ This is the baileys branch for Project CrossComm, for JS fullstack and HTML fron
 ####Contributors:
 Tejas Metha  
 Agranya Ketha  
-Ben pleaseinsertyourlastnamehere  
+Ben Osias
 Elijah Uribe  
 Frank Gomes  
 Connor McDermid
