@@ -1,5 +1,5 @@
 #ProjectCrossComm
-This is the baileys branch for Project CrossComm, for JS fullstack and HTML frontend development.
+This is the production branch for the website. For God's sake check your changes before you push here.
 
 ####Contributors:
 Tejas Metha  
@@ -11,3 +11,4 @@ Connor McDermid
 
 To contact us please email:  
 connor.mcdermid@mcvts.org
+The website link is [here](https://epicgamer1yt.github.io/ProjectCrossComm)
