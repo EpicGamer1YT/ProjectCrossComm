@@ -37,14 +37,12 @@ function showsignin() {
 function googlesignin() {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-    firebase.auth().SignInWithRedirect(provider);
-    firebase.auth().getRedirectResult().then(function (result) {
-        if (result.credential) {
-            var token = result.credential.accessToken;
-        }
-        var user = result.user;
+    firebase.auth().languageCode = 'en';
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        var token = result.credential.accessToken; //Google Auth access token
+        var user = result.user; //Contains all user info that Google provided us
     }).catch(function(error) {
-        //Handle errors here
-    })
+        //handle errors
+    });
     
 }
