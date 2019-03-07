@@ -1,5 +1,3 @@
-//Don't break this please
-
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -44,5 +42,13 @@ function googlesignin() {
     }).catch(function(error) {
         //handle errors
     });
+
     
+}
+function signInUser() {
+    var email = document.getElementById("emailreauth");
+    var pass = document.getElementById("passreauth");
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+        //Handle errors here
+    });
 }
