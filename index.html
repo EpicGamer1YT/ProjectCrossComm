@@ -31,10 +31,10 @@
 
 
         <script src="main.js" rel="script"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project Cross Comm!</title>
-    <link rel="stylesheet" href="stylesheet.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Project Cross Comm!</title>
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
         <h1>Project Cross Comm!</h1>
@@ -56,13 +56,13 @@
                     </p>
                     <p>
                         <label for="passinput">Password</label>
-                        <input type="password" id="passinput" value="secret">
+                        <input type="password" id="passinput" value="">
                     </p>
                     <button id="submit" onclick="submitAcc()">SUBMIT</button>
                 </fieldset>
             </form>
         </div>
-        <button id="signin" onclick="showsignin()">Already have an account?</button>
+        <button id="showsignin" onclick="showsignin()">Already have an account?</button>
         <div id="hiddensignin">
             <form>
                 <fieldset>
@@ -75,6 +75,7 @@
                         <label for="passreauth">Password</label>
                         <input type="password" id="passreauth" value="">
                     </p>
+                    <button id="signin" onclick="signInUser()">SUBMIT</button>
                 </fieldset>
             </form>
         </div>
