@@ -1,4 +1,5 @@
 //Don't break this please
+
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -32,4 +33,18 @@ function showsignin() {
     } else {
         x.style.display = "none";
     }
+}
+function googlesignin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+    firebase.auth().SignInWithRedirect(provider);
+    firebase.auth().getRedirectResult().then(function (result) {
+        if (result.credential) {
+            var token = result.credential.accessToken;
+        }
+        var user = result.user;
+    }).catch(function(error) {
+        //Handle errors here
+    })
+    
 }

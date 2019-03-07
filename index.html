@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <!--suppress HtmlRequiredLangAttribute -->
-<html>
+       <html>
     <head>
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
-
-        <!-- Firebase App is always required and must be first -->
-
         <script>
             // Initialize Firebase
             var config = {
@@ -19,12 +15,13 @@
             };
             firebase.initializeApp(config);
         </script>
+        <!-- Firebase App is always required and must be first -->
+        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
 
         <!-- Add additional services that you want to use -->
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-functions.js"></script>
 
@@ -48,6 +45,7 @@
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
         <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
+        <button id="googlesignin" onclick="googlesignin()">Sign in with Google</button>
         <div id="hiddenaccountcreation">
             <form>
                 <fieldset>
