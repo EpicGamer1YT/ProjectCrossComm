@@ -19,7 +19,8 @@ function showAccCreate() {
 function submitAcc() {
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    // noinspection JSUnresolvedFunction
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) { //Function performs as intended even though unresolved.
        console.log(error.log);
        console.log(error.message);
     });
