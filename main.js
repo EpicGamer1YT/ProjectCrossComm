@@ -1,4 +1,5 @@
 //Don't break this please
+
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -19,7 +20,8 @@ function showAccCreate() {
 function submitAcc() {
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    // noinspection JSUnresolvedFunction
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) { //Function performs as intended even though unresolved.
        console.log(error.log);
        console.log(error.message);
     });
@@ -31,4 +33,16 @@ function showsignin() {
     } else {
         x.style.display = "none";
     }
+}
+function googlesignin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+    firebase.auth().languageCode = 'en';
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        var token = result.credential.accessToken; //Google Auth access token
+        var user = result.user; //Contains all user info that Google provided us
+    }).catch(function(error) {
+        //handle errors
+    });
+    
 }
