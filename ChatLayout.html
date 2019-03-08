@@ -6,22 +6,16 @@
     <title>ChatLayout</title>
 </head>
 <style>
-    div {
-    background-color: lightgrey;
-    width: 1000px;
-    border: 9px black;
-    padding: 60px;
-    margin: 275px;
-}
+
     .center {
         margin: auto;
-        width: 59.8%;
+        width: 64.7%;
         border: 0px solid #000000;
-        padding: 10px;
+        padding: 50px;
     }
     .center2 {
         margin: auto;
-        width: 50%;
+        width: 55%;
         border: 3px solid #000000;
         padding: 100px;
     }
@@ -29,8 +23,17 @@
         display: inline-block;
     }
 
+
 </style>
 <body>
+    <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+    <div id="myDropdown" class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+    </div>
+    </div>
     <h1 id= "title">Welcome To Your Private Chat Room!</h1>
         <h3>Invite your friend to start the chat.</h3>
     <div class = center2>Display Text Here</div>
@@ -44,5 +47,4 @@
     <h10> Click <a id="link" href="index.html">here</a> to go back to the main page (this will close the chat)</h10>
 
 </body>
-
 </html>

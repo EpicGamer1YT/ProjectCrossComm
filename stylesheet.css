@@ -16,6 +16,7 @@ padding: 0px 0px 0px 0px;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    width:608px;
 }
 button2{
     padding: 0px 0px 0px 0px;
@@ -28,9 +29,12 @@ button2{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    width: 614px;
+
 }
 
 body {
+
     background-color: #000000;
     font-family: "Open Serif", sans-serif;
     padding: 0 14px 5px 0px;
@@ -49,6 +53,7 @@ h1 {
     font-weight: 500;
     margin-top: 100px;
     color: white;
+
 }
 h2{
     background-color: #000000;
@@ -104,5 +109,14 @@ h4{
 html {
     alignment: center;
 }
+a{
+    padding: 0px 0px 0px 0px;
+    color: #f9fffb;
+    margin-left: 55px;
+
+
+}
+
+
 
 
