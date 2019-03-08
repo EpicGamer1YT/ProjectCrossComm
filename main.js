@@ -17,24 +17,28 @@ function showAccCreate() {
     }
 }
 function submitAcc() {
+    alert("Signing in");
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
-    var username = document.getElementById("usernameinput");
-
-
-    // noinspection JSUnresolvedFunction
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result, email, username) {
-        writeUserDataFromEmailSignin(email, username, result.user.uid);
+    var username = document.getElementById("usernameinput").value;
+    alert("recorded values");
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
+        writeUserDataFromEmailSignin(email, name, firebase.auth().currentUser.uid);
+        alert("Wrote data");
     }).catch(function(error) {
-        //Handle errors here
+        alert("Error");
+        console.log(error.message);
+        console.log(error.code);
     });
-
 }
 function writeUserDataFromEmailSignin(email, name, uuid) {
     database.ref('users/' + uuid).set({
-        name: name,
-        email: email,
-        uid: uuid,
+        "name": name,
+        "email": email,
+        "uid": uuid,
+    }).catch(function(error) {
+        console.log(error.message);
+        console.log(error.code);
     });
 }
 function showsignin() {
@@ -52,16 +56,29 @@ function googlesignin() {
     firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken; //Google Auth access token
         var user = result.user; //Contains all user info that Google provided us
+        writeToDatabaseFromGoogle(user.email, user.displayName, user.uid, user.photoUrl);
     }).catch(function(error) {
-        //handle errors
+        console.log(error.message);
+        console.log(error.code);
     });
 
     
 }
+function writeToDatabaseFromGoogle(email, name, uuid, image_url) {
+    database.ref("users/" + uuid).set({
+        "name": name,
+        "email": email,
+        //"imageUrl": image_url,
+        "uid": uuid,
+    }).catch(function(error) {
+        console.log(error.message);
+        console.log(error.code);
+    })
+}
 function signInUser() {
     var email = document.getElementById("emailreauth");
     var pass = document.getElementById("passreauth");
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
         //Handle errors here
         let errorCode = error.code;
         let errorMessage = error.MESSAGE;
