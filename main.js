@@ -7,6 +7,7 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
+var database = firebase.database();
 function showAccCreate() {
     var x = document.getElementById("hiddenaccountcreation");
     if (x.style.display === "none") {
@@ -18,10 +19,22 @@ function showAccCreate() {
 function submitAcc() {
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
+    var username = document.getElementById("usernameinput");
+
+
     // noinspection JSUnresolvedFunction
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) { //Function performs as intended even though unresolved.
-       console.log(error.log);
-       console.log(error.message);
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result, email, username) {
+        writeUserDataFromEmailSignin(email, username, result.user.uid);
+    }).catch(function(error) {
+        //Handle errors here
+    });
+
+}
+function writeUserDataFromEmailSignin(email, name, uuid) {
+    database.ref('users/' + uuid).set({
+        name: name,
+        email: email,
+        uid: uuid,
     });
 }
 function showsignin() {
@@ -50,5 +63,7 @@ function signInUser() {
     var pass = document.getElementById("passreauth");
     firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
         //Handle errors here
+        let errorCode = error.code;
+        let errorMessage = error.MESSAGE;
     });
 }

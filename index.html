@@ -37,6 +37,10 @@
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
+    <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
+    <button id="showsignin" onclick="showsignin()">Already have an account?</button>
+    <button2 id="googlesignin" onclick="googlesignin()">Sign in with Google</button2>
+
         <h1>Project Cross Comm!</h1>
         <h2 id="subtitle">
         Welcome to <strong>Project Cross Comm!</strong>
@@ -44,12 +48,14 @@
         <img height="200px" src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg" width="260px" alt="If you can't see this image you're a pleb">
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
-        <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
-        <button id="googlesignin" onclick="googlesignin()">Sign in with Google</button>
+
         <div id="hiddenaccountcreation">
             <form>
                 <fieldset>
                     <legend>Account Creation</legend>
+                    <p>
+                        <label for="usernameinput">Username</label>
+                        <input type="text" id="usernameinput">
                     <p>
                         <label for="emailinput">Email</label>
                         <input type="email" id="emailinput" value="">
@@ -62,11 +68,13 @@
                 </fieldset>
             </form>
         </div>
-        <button id="showsignin" onclick="showsignin()">Already have an account?</button>
         <div id="hiddensignin">
             <form>
                 <fieldset>
                     <legend>Sign In</legend>
+                    <p>
+                        <label for="usernamereauth">Username</label>
+                        <input type="text" id="usernamereauth" value="">
                     <p>
                         <label for="emailreauth">Email</label>
                         <input type="email" id="emailreauth" value="">
@@ -85,6 +93,6 @@
     </body>
     <footer>
 
-        <noscript>Man, sucks for you! We only support modern, functioning browsers.</noscript>
+        <noscript>Man, sucks for you! We only support modern, functioning browsers. Maybe you should get JavaScript </noscript>
     </footer>
 </html>
