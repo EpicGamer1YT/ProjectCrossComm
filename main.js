@@ -16,30 +16,38 @@ function showAccCreate() {
         x.style.display = "none";
     }
 }
-function submitAcc() {
+function submitAcc() { //Deprecated as of 2019.03.12
     alert("Signing in");
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
     var username = document.getElementById("usernameinput").value;
+    var user;
     alert("recorded values");
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function (result) {
-        writeUserDataFromEmailSignin(email, name, firebase.auth().currentUser.uid);
-        alert("Wrote data");
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
+        alert("Gets into .then");
+        user = result.value;
+        alert("User value recorded");
+        writeUserDataFromEmailSignin(email, username, user.uid);
+        alert(user.uid);
     }).catch(function(error) {
-        alert("Error");
+        alert(error.message);
         console.log(error.message);
         console.log(error.code);
     });
+
 }
-function writeUserDataFromEmailSignin(email, name, uuid) {
+function writeUserDataFromEmailSignin(email, name, uuid) { //Deprecated as of 2019.03.12
+    alert("Entered function");
     database.ref('users/' + uuid).set({
         "name": name,
         "email": email,
         "uid": uuid,
-    }).catch(function(error) {
+    }).then(function() {
+        alert("Completed");
+    }).catch(function() {
         console.log(error.message);
         console.log(error.code);
-    });
+    })
 }
 function showsignin() {
     var x = document.getElementById("hiddensignin");
@@ -73,14 +81,17 @@ function writeToDatabaseFromGoogle(email, name, uuid, image_url) {
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
-    })
+    });
 }
 function signInUser() {
     var email = document.getElementById("emailreauth");
     var pass = document.getElementById("passreauth");
+    // noinspection JSUnresolvedFunction
     firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
         //Handle errors here
         let errorCode = error.code;
         let errorMessage = error.MESSAGE;
+        console.log(errorCode);
+        console.log(errorMessage);
     });
 }
