@@ -2,23 +2,29 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
 body {
-    background-color: DodgerBlue;
+    background-color: #000000;
     font-family: "Open Serif", sans-serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
-    color: #404040;
+    color: #ffffff;
 }
 #title {
-    background-color: black;
+    background-color: #ffffff;
     font-family: "Arial", sans-serif;
     padding: 15px 5px 0 718px;
     font-size: 20px;
+    color: white;
     margin: 0px;
 
 }
 #type {
     display: block;
     width: 100%;
+    color: white;
     text-align: center;
 }
+h3{
+    color: white;
+}
+
