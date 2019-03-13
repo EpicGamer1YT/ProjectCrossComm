@@ -16,27 +16,36 @@ function showAccCreate() {
         x.style.display = "none";
     }
 }
-function submitAcc() { //Deprecated as of 2019.03.12
+function submitAcc() {
     alert("Signing in");
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
     var username = document.getElementById("usernameinput").value;
     var user;
     alert("recorded values");
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
-        alert("Gets into .then");
-        user = result.value;
-        alert("User value recorded");
-        writeUserDataFromEmailSignin(email, username, user.uid);
-        alert(user.uid);
-    }).catch(function(error) {
-        alert(error.message);
-        console.log(error.message);
-        console.log(error.code);
+    firebase.auth().createUserWithEmailAndPassword(email,password).then(response => {
+        alert("past roadblock");
+        const uuid = response.user.uid;
+        writeUserDataFromEmailSignin(email, name, uuid).then(response => {
+            //Do things with response
+        }).catch(error => {
+            console.log(error.message);
+            console.log(error.code);
+        });
+        response.user.getIdToken().then(token => {
+            const userToken = token;
+            //Do things with token
+        }).catch(error => {
+            console.log(error.message);
+            console.log(error.code);
+        });
+    }).catch(error => {
+       console.log(error.message);
+       console.log(error.code);
     });
 
 }
-function writeUserDataFromEmailSignin(email, name, uuid) { //Deprecated as of 2019.03.12
+function writeUserDataFromEmailSignin(email, name, uuid) {
     alert("Entered function");
     database.ref('users/' + uuid).set({
         "name": name,
