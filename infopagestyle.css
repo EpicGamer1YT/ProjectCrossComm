@@ -8,7 +8,7 @@ p, h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 body {
-    background-color: #9fffc8;
+    background-color: black;
     font-family: "Arial", serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
@@ -19,11 +19,47 @@ body {
 }
 table, tr, th {
     align-content: center;
-    border: 3px solid black;
+    border: 3px solid white;
     padding: 3px;
     border-spacing: 5px;
+    width: 1920px
 }
 #bottombar {
-    background-color: #a4eebf;
+    background-color: black;
     font-family: "Times New Roman", serif;
+}
+a{
+    color: DodgerBlue;
+}
+th{
+    color: white;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+h1{
+    color: white;
+    }
+h2{
+    color: white;
 }
