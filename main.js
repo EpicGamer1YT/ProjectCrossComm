@@ -8,7 +8,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-function showAccCreate() {
+function showAccCreate() { //Hides and shows account create button
     var x = document.getElementById("hiddenaccountcreation");
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -16,36 +16,43 @@ function showAccCreate() {
         x.style.display = "none";
     }
 }
-function submitAcc() {
-    alert("Signing in");
+/*function submitAcc() { //On submit button pressed
+    console.log("Signing in");
     var email = document.getElementById("emailinput").value;
     var password = document.getElementById("passinput").value;
     var username = document.getElementById("usernameinput").value;
+    //console.log(email + password +username);
     var user;
-    alert("recorded values");
-    firebase.auth().createUserWithEmailAndPassword(email,password).then(response => {
-        alert("past roadblock");
-        const uuid = response.user.uid;
-        writeUserDataFromEmailSignin(email, name, uuid).then(response => {
-            //Do things with response
-        }).catch(error => {
-            console.log(error.message);
-            console.log(error.code);
-        });
-        response.user.getIdToken().then(token => {
-            const userToken = token;
-            //Do things with token
-        }).catch(error => {
-            console.log(error.message);
-            console.log(error.code);
-        });
-    }).catch(error => {
-       console.log(error.message);
-       console.log(error.code);
+    console.log("Recorded Values");
+    firebase.auth().createUserWithEmailAndPassword(email,password).then(function(result) {
+        console.log("Gets into .then");
+        var user = firebase.auth().currentUser;
+        var uidvalue = user.uid;
+        console.log(uidvalue);
+        console.log(uidvalue);
+        console.log("User value recorded");
+        writeUserDataFromEmailSignin(email, username,uidvalue);
+        console.log(user.uid);
+    }).catch(function(error) {
+        alert(error.message);
+        console.log(error.message);
+        console.log(error.code);
     });
+    console.log("End of Function");
+}*/
 
-}
-function writeUserDataFromEmailSignin(email, name, uuid) {
+
+
+
+//Testing if auth state changes
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        alert("User is signed in.");
+        alert(user.uid);
+        document.getElementById("debugtest").innerHTML = "Signed in";
+    }
+});
+function writeUserDataFromEmailSignin(email, name, uuid) { //Writes user data to database if user signs in
     alert("Entered function");
     database.ref('users/' + uuid).set({
         "name": name,
@@ -66,7 +73,7 @@ function showsignin() {
         x.style.display = "none";
     }
 }
-function googlesignin() {
+function googlesignin() { //Signs people into app via Google
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
     firebase.auth().languageCode = 'en';
@@ -81,7 +88,7 @@ function googlesignin() {
 
     
 }
-function writeToDatabaseFromGoogle(email, name, uuid, image_url) {
+function writeToDatabaseFromGoogle(email, name, uuid, image_url) { //Writes user data to database from Google signin
     database.ref("users/" + uuid).set({
         "name": name,
         "email": email,
@@ -92,7 +99,7 @@ function writeToDatabaseFromGoogle(email, name, uuid, image_url) {
         console.log(error.code);
     });
 }
-function signInUser() {
+function signInUser() { //Uses email sign-in so signin to existing account
     var email = document.getElementById("emailreauth");
     var pass = document.getElementById("passreauth");
     // noinspection JSUnresolvedFunction

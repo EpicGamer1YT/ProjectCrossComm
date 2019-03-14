@@ -46,9 +46,9 @@
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
         <div id="hiddenaccountcreation">
-            <form>
+            <form method="post" id="createForm" class="important">
                 <fieldset>
-                    <legend>Account Creation -- DEPRECATED</legend>
+                    <legend>Account Creation</legend> <!--Create account via email sign-in-->
                     <p>
                         <label for="usernameinput">Username</label>
                         <input type="text" id="usernameinput" name="createUsername" placeholder="Username">
@@ -67,7 +67,7 @@
         <div id="hiddensignin">
             <form>
                 <fieldset>
-                    <legend>Sign In -- DEPRECATED</legend>
+                    <legend>Sign In</legend>
                     <p>
                         <label for="usernamereauth">Username</label>
                         <input type="text" id="usernamereauth" value="">
@@ -83,7 +83,7 @@
                 </fieldset>
             </form>
         </div>
-        <div id="getthisblockoutofmygoddamnedway">
+        <div id="getthisblockoutofmygoddamnedway"> <!--Problematic code block that another member of my team put there -->
             <a style = "color: white; "id="link" href="InfoPage.html">Click here for more information.</a>
             <h6></h6>
             <a style = "color: white; "id="link2" href="ChatLayout.html">Click Here To Chat</a>
@@ -93,7 +93,7 @@
         </div>
     </body>
     <footer>
-
+        <p id="debugtest" class="debug">Haven't Been Signed In Yet</p>
         <noscript>Man, sucks for you! We only support modern, functioning browsers. Maybe you should get JavaScript </noscript>
     </footer>
 </html>
