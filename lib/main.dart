@@ -3,28 +3,31 @@ import 'dart:async';
 import 'dart:io' show Platform;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:projectcrosscomm/ui/chats_home.dart';
+import 'package:projectcrosscomm/ui/new_chat.dart';
+import 'package:projectcrosscomm/ui/sign_in.dart';
+import 'package:projectcrosscomm/ui/sign_up.dart';
 
 Future<void> main() async {
-  final FirebaseApp app = await FirebaseApp.configure(
-    name: 'db',
-    options: Platform.isIOS
-        ? const FirebaseOptions(
-      googleAppID: '1:412861101382:ios:fc550f5ccb3e419d',
-      gcmSenderID: '412861101382',
-      databaseURL: 'https://projectcrosscomm.firebaseio.com',
-    )
-        : const FirebaseOptions(
-      googleAppID: '1:412861101382:android:fc550f5ccb3e419d',
-      apiKey: 'AIzaSyAdwFoezBaL2HylhnFDQsZZ0kPbpALjeqo',
-      databaseURL: 'https://projectcrosscomm.firebaseio.com',
-    ),
-  );
-  runApp(MyApp(app: app,));
+//  final FirebaseApp app = await FirebaseApp.configure(
+//    name: 'db',
+//    options: Platform.isIOS
+//        ? const FirebaseOptions(
+//      googleAppID: '1:412861101382:ios:fc550f5ccb3e419d',
+//      gcmSenderID: '412861101382',
+//      databaseURL: 'https://projectcrosscomm.firebaseio.com',
+//    )
+//        : const FirebaseOptions(
+//      googleAppID: '1:412861101382:android:fc550f5ccb3e419d',
+//      apiKey: 'AIzaSyAdwFoezBaL2HylhnFDQsZZ0kPbpALjeqo',
+//      databaseURL: 'https://projectcrosscomm.firebaseio.com',
+//    ),
+//  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key key, this.app}) : super(key: key);
-  final FirebaseApp app;
+  MyApp({Key key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -44,9 +47,16 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
         buttonColor: Colors.blue,
+        cardColor: Color(0xFF252525),
         textTheme: TextTheme(title: TextStyle(color: Colors.white), subtitle: TextStyle(color: Colors.white)),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page', app: app),
+      home: SignIn(),
+      routes: <String, WidgetBuilder> {
+        SignIn.routeName: (BuildContext context) => new SignIn(),
+        SignUp.routeName: (BuildContext context) => new SignUp(),
+        ChatsHome.routeName: (BuildContext context) => new ChatsHome(),
+        NewChat.routeName: (BuildContext context) => new NewChat(),
+      },
     );
   }
 }
