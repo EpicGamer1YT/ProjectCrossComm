@@ -8,7 +8,7 @@ p, h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 body {
-    background-color: #9fffc8;
+    background-color: black;
     font-family: "Arial", serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
@@ -19,11 +19,27 @@ body {
 }
 table, tr, th {
     align-content: center;
-    border: 3px solid black;
+    border: 3px solid white;
     padding: 3px;
     border-spacing: 5px;
 }
 #bottombar {
-    background-color: #a4eebf;
+    background-color: black;
     font-family: "Times New Roman", serif;
+}
+th{
+    width: 1000px;
+    color: white;
+    position: relative;
+    left: 0px;
+    right: 30px;
+}
+h1{
+    color: white;
+}
+h2{
+    color: white;
+}
+a{
+    color: DodgerBlue;
 }
