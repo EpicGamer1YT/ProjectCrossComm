@@ -5,33 +5,7 @@
     /* This is for critical elements that should not be touched without asking*/
 }
 /* Fonts from Google Fonts - more at https://fonts.google.com */
-button{
-padding: 0px 0px 0px 0px;
-    margin-top: 0px;
-    background-color: Dodgerblue; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    width:608px;
-}
-button2{
-    padding: 0px 0px 0px 0px;
-    margin-top: 0px;
-    background-color: Red; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    width: 614px;
 
-}
 
 body {
 
@@ -47,7 +21,7 @@ h12{
 
 }
 h1 {
-    padding:0px 5px 0px 700px;
+    padding:0% 0% 0% 39%;
     font-family: "Arial", serif;
     font-size: 32px;
     font-weight: 500;
@@ -58,14 +32,14 @@ h1 {
 h2{
     background-color: #000000;
     font-family: "Arial", sans-serif;
-    padding: 14px 5px 0 718px;
+    padding: 0% 0% 0% 40%;
     font-size: 20px;
     margin: 0px;
     color: white;
     font-stretch:ultra-condensed;
 }
 img{
-    padding: 14px 5px 0 718px;
+    padding: 0% 0% 0% 40%;
 
 }
 p1 {
@@ -85,12 +59,14 @@ h4{
 
 }
 #desc {
-    color: DodgerBlue;
+    position: relative;
+    left:0%;
+    color: #ffff33;
     font-family: Arial, serif;
     font-stretch: semi-expanded;
     border-style: dotted;
-    margin-left: 60px;
-    margin-right:100px;
+    margin-left: 12.5%;
+    margin-right:12.5%;
 }
 
 .signup {
@@ -118,8 +94,8 @@ a{
 }
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
     overflow: hidden;
     background-color: #333;
 }
@@ -138,6 +114,11 @@ li a {
 
 li a:hover {
     background-color: #111;
+}
+
+p82{
+    margin-left:3%;
+    color: white;
 }
 
 
