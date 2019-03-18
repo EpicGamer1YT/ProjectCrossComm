@@ -2,6 +2,7 @@
 <!--suppress HtmlRequiredLangAttribute -->
        <html>
     <head>
+        <script src="jquery.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
         <script>
             // Initialize Firebase
@@ -54,19 +55,19 @@
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
         <div id="hiddenaccountcreation">
-            <form method="post" id="createForm" class="important">
+            <form method="post" id="createForm" class="important" action="emailSubmit.js">
                 <fieldset>
                     <legend>Account Creation</legend> <!--Create account via email sign-in-->
                     <p>
                         <label for="usernameinput">Username</label>
-                        <input type="text" id="usernameinput" name="createUsername" placeholder="Username">
+                        <input type="text" id="usernameinput" name="createUsername" placeholder="Username" autocomplete="current-username">
                     <p>
                         <label for="emailinput">Email</label>
-                        <input type="email" id="emailinput" value="" placeholder="example@example.com" name="createEmail">
+                        <input type="email" id="emailinput" value="" placeholder="example@example.com" name="createEmail" autocomplete="current-email">
                     </p>
                     <p>
                         <label for="passinput">Password</label>
-                        <input type="password" id="passinput" value="" placeholder="password" name="createPass">
+                        <input type="password" id="passinput" value="" placeholder="password" name="createPass" autocomplete="current-password">
                     </p>
                     <p>
                         <input type="submit" id="submitButton">
