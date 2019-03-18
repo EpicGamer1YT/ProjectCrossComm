@@ -61,12 +61,24 @@ function writeUserDataFromEmailSignin(email, name, uuid) { //Writes user data to
         "email": email,
         "uid": uuid,
     }).then(function() {
-        alert("Completed");
+        console.log("Push complete.")
     }).catch(function() {
         console.log(error.message);
         console.log(error.code);
-    })
+    });
+    database.ref('users/emailConv/' + email.replace(".", ",")).set({
+        "name": name,
+        "email": email,
+        "uid": uuid,
+    }).then(function() {
+        console.log("Push complete.")
+    }).catch(function (error) {
+        console.log(error.message);
+        console.log(error.code);
+    });
 }
+
+
 
 
 
@@ -219,3 +231,7 @@ function signInUser() { //Uses email sign-in so signin to existing account
         console.log(errorMessage);
     });
 }*/
+
+function searchForEmail() {
+
+}
