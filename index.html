@@ -19,11 +19,8 @@
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
 
         <!-- Add additional services that you want to use -->
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-messaging.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-functions.js"></script>
 
 
         <!-- Comment out (or don't include) services that you don't want to use -->
@@ -36,7 +33,19 @@
         <title>Project Cross Comm!</title>
         <link rel="stylesheet" href="stylesheet.css">
     </head>
+    <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="InfoPage.html">Information</a></li>
+        <li><a href="ChatLayout.html">Chat</a></li>
+        <li><a href="ChatLayoutGC.html">Groupchat</a></li>
+        <li><a href="https://accounts.google.com/signin/oauth/oauthchooseaccount?hl=en&client_id=412861101382-82aanbovm04f03v5213a1r2gcr2tr4cp.apps.googleusercontent.com&as=T7XsLmmpTa2e0shphFJ4Fg&destination=https%3A%2F%2Fprojectcrosscomm.firebaseapp.com&approval_state=!ChRoemoxTDliWFZ2b2k0NmFYQWY5VRIfazV2SnVwZWw2R2NTc0NEZU1wUEotOWJwTmVEQ2x4WQ%E2%88%99AJDr988AAAAAXIuauDVwBq5zKCvXY9N-bNGaW2p6gFb-&oauthgdpr=1&oauthriskyscope=1&xsrfsig=ChkAeAh8TwAD2H1fgKlA8ZwzCbeTQPZrcm-xEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow">Sign Up</a></li>
+    </ul>
+
     <body>
+    <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
+    <button id="showsignin" onclick="showsignin()">Already have an account?</button>
+    <button2 id="googlesignin" onclick="googlesignin()">Sign in with Google</button2>
+
         <h1>Project Cross Comm!</h1>
         <h2 id="subtitle">
         Welcome to <strong>Project Cross Comm!</strong>
@@ -44,29 +53,34 @@
         <img height="200px" src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg" width="260px" alt="If you can't see this image you're a pleb">
         <h2></h2>
         <p id="desc"> Project Cross Comm a.k.a Chats (with a z) is a free to use chatting program that runs in your browser. All the chats are encrypted, so no one can read your chats. Enjoy the program and chat away.</p>
-        <button id="accountcreate" onclick="showAccCreate()">Create your account here!</button>
-        <button id="googlesignin" onclick="googlesignin()">Sign in with Google</button>
         <div id="hiddenaccountcreation">
-            <form>
+            <form method="post" id="createForm" class="important">
                 <fieldset>
-                    <legend>Account Creation</legend>
+                    <legend>Account Creation</legend> <!--Create account via email sign-in-->
+                    <p>
+                        <label for="usernameinput">Username</label>
+                        <input type="text" id="usernameinput" name="createUsername" placeholder="Username">
                     <p>
                         <label for="emailinput">Email</label>
-                        <input type="email" id="emailinput" value="">
+                        <input type="email" id="emailinput" value="" placeholder="example@example.com" name="createEmail">
                     </p>
                     <p>
                         <label for="passinput">Password</label>
-                        <input type="password" id="passinput" value="">
+                        <input type="password" id="passinput" value="" placeholder="password" name="createPass">
                     </p>
-                    <button id="submit" onclick="submitAcc()">SUBMIT</button>
+                    <p>
+                        <input type="submit" id="submitButton">
+                    </p>
                 </fieldset>
             </form>
         </div>
-        <button id="showsignin" onclick="showsignin()">Already have an account?</button>
         <div id="hiddensignin">
             <form>
                 <fieldset>
                     <legend>Sign In</legend>
+                    <p>
+                        <label for="usernamereauth">Username</label>
+                        <input type="text" id="usernamereauth" value="">
                     <p>
                         <label for="emailreauth">Email</label>
                         <input type="email" id="emailreauth" value="">
@@ -79,12 +93,17 @@
                 </fieldset>
             </form>
         </div>
-        <div id="getthisblockoutofmygoddamnedway">
-            <a id="link" href="InfoPage.html">Click here for more information.</a>
+        <div id="getthisblockoutofmygoddamnedway"> <!--Problematic code block that another member of my team put there -->
+            <a style = "color: white; "id="link" href="InfoPage.html">Click here for more information.</a>
+            <h6></h6>
+            <a style = "color: white; "id="link2" href="ChatLayout.html">Click Here To Chat</a>
+            <h6></h6>
+            <a style = "color: white; "id="link3" href="https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661">Privacy Policy </a>
+
         </div>
     </body>
     <footer>
-
-        <noscript>Man, sucks for you! We only support modern, functioning browsers.</noscript>
+        <p id="debugtest" class="debug">Haven't Been Signed In Yet</p>
+        <noscript>Man, sucks for you! We only support modern, functioning browsers. Maybe you should get JavaScript </noscript>
     </footer>
 </html>
