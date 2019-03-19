@@ -78,3 +78,6 @@ function splitter() {
     parseSearchedEmails();
     showPassPhraseInput();
 }
+function sendMessage() { //TEMPORARY. IF IMPLEMENTED, 
+
+}
