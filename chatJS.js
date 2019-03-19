@@ -11,6 +11,7 @@ var database = firebase.database();
 var remoteEmail;
 var target;
 var local;
+var targetUID;
 
 function searchEmails(email) {
     var username;
@@ -43,7 +44,7 @@ function parseSearchedEmails() {
 
 function startChat(user, userkey, userPubKey) { //Will start an encrypted chat between two users
     target = database.ref("/users/emailConv/" + remoteEmail).once()
-    var targetUID = target.uid;
+    targetUID = target.uid;
     var localUID = firebase.auth().currentUser().uid;
     database.ref("/chats/" + localUID + " " + targetUID + "/" + localUID + "/privkey").set({
         "privkey": cryptico.privateKey(userkey).toString,
@@ -78,6 +79,23 @@ function splitter() {
     parseSearchedEmails();
     showPassPhraseInput();
 }
-function sendMessage() { //TEMPORARY. IF IMPLEMENTED, 
-
+function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
+    var localuuid = firebase.auth().currentUser().uid;
+    var localEmail = firebase.auth().currentUser().email;
+    var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
+    if (position) {
+        database.ref("/chats/" + localuuid + targetUID + "/messages").set({
+            "timestamp":  document.getElementById("sendmessage").value,
+        }).catch(function(error) {
+            console.log(error.message);
+            console.log(error.code);
+        });
+    } else {
+        database.ref("/chats/" + targetUID + localuuid + "/messages").set({
+            "timestamp":  document.getElementById("sendmessage").value,
+        }).catch(function(error) {
+            console.log(error.message);
+            console.log(error.code);
+        });
+    }
 }
