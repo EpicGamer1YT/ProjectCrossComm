@@ -10,19 +10,20 @@ p, h1, h2, h3, h4, h5, h6 {
 body {
     background-color: black;
     font-family: "Arial", serif;
-    padding: 0 14px 5px 0px;
+    padding: 0% 0% 0% 0%;
     font-size: 20px;
     margin: 0;
 }
+
 #ContactUs {
     text-indent: 50px;
 }
-table, tr, th {
+table, tr{
     align-content: center;
     border: 3px solid white;
-    padding: 3px;
+    padding: .25%;
     border-spacing: 5px;
-    width: 1920px;
+    width: 100%;
 }
 #bottombar {
     background-color: black;
@@ -30,12 +31,19 @@ table, tr, th {
 }
 th{
     color: white;
+    border: 3px solid white;
+}
+tr{
+
 }
 h1{
     color: white;
+
 }
 h2{
     color:white;
+
+
 }
 a{
     color: DodgerBlue;
