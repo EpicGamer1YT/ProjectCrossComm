@@ -80,19 +80,21 @@ function splitter() {
     showPassPhraseInput();
 }
 function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
+    var date = new Date();
+    var timestamp = date.getTime();
     var localuuid = firebase.auth().currentUser().uid;
     var localEmail = firebase.auth().currentUser().email;
     var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
     if (position) {
-        database.ref("/chats/" + localuuid + targetUID + "/messages").set({
-            "timestamp":  document.getElementById("sendmessage").value,
+        database.ref("/chats/" + localuuid + " " + targetUID + "/messages").set({
+            timestamp:  document.getElementById("sendmessage").value,
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + localuuid + "/messages").set({
-            "timestamp":  document.getElementById("sendmessage").value,
+        database.ref("/chats/" + targetUID + " " + localuuid + "/messages").set({
+            timestamp:  document.getElementById("sendmessage").value,
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);

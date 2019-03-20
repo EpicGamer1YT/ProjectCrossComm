@@ -62,7 +62,7 @@ function writeUserDataFromEmailSignin(email, name, uuid) { //Writes user data to
         "uid": uuid,
     }).then(function() {
         console.log("Push complete.")
-    }).catch(function() {
+    }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
     });
