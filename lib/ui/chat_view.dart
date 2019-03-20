@@ -1,16 +1,25 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:pointycastle/api.dart' as api;
+import 'package:pointycastle/asymmetric/api.dart';
+import 'package:pointycastle/asymmetric/rsa.dart';
+import 'package:pointycastle/key_generators/api.dart';
+import 'package:pointycastle/key_generators/rsa_key_generator.dart';
+import 'package:pointycastle/random/fortuna_random.dart';
 import 'package:projectcrosscomm/ui/chats_home.dart';
+import 'package:projectcrosscomm/ui/custom/chat_bubble.dart';
 
 class ChatsView extends StatefulWidget {
-  ChatsView({this.newChat, this.natUid, this.oUid});
-
-  final bool newChat;
+  ChatsView({this.oUid, this.natUid, this.uidChat, this.accepted});
+  final String uidChat;
   final String natUid;
   final String oUid;
-
+  final bool accepted;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -20,6 +29,13 @@ class ChatsView extends StatefulWidget {
 
 class ChatsViewState extends State<ChatsView> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +61,43 @@ class ChatsViewState extends State<ChatsView> {
                 );
               }),
         ),
-
-      ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Expanded(child: new ListView(
+                children: <Widget>[
+                  new Bubble(message: "GHJGDSHGFHGFHGHSGDHKJSFKGJDWFWGJHLDWHSGK", time: "hh", isMe: true, delivered: true, userInit: "T",),
+                ],
+              ),),
+              new ClipRRect(
+                borderRadius: new BorderRadius.circular(30.0),
+                child: new Container(
+                  color: Colors.grey,
+                  child: new Row(children: <Widget>[
+                    new Padding(padding: EdgeInsets.all(10.0)),
+                    new Expanded(
+                      child: new TextField(
+                        decoration: InputDecoration(fillColor: Colors.grey, hintText: "Type chat..."),
+                      ),
+                    ),
+                    new IconButton(
+                        icon: Icon(Icons.send),
+                        onPressed: () {
+                          print("HI");
+                        }),
+                  ]),
+                ),
+              ),
+              Platform.isIOS ? new Padding(padding: EdgeInsets.all(30)) : new Container(),
+            ],
+          ),
+        )
+        ),
     );
+  }
+
+  void pushChat(RSAPrivateKey privKey) {
+
   }
 }

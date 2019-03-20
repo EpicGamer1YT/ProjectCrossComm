@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         buttonColor: Colors.blue,
         cardColor: Color(0xFF252525),
-        textTheme: TextTheme(title: TextStyle(color: Colors.white), subtitle: TextStyle(color: Colors.white)),
+        textTheme: TextTheme(title: TextStyle(color: Colors.white), subtitle: TextStyle(color: Colors.white), display1: TextStyle(color: Colors.black, fontSize: 16.0)),
       ),
       home: SignIn(),
       routes: <String, WidgetBuilder> {

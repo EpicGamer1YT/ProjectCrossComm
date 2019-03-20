@@ -44,8 +44,8 @@ class SignInState extends State<SignIn>{
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');
             else if (snapshot.hasData) {
-              return      new Scaffold(
-                appBar: AppBar(title: new Text("Welcome to ProjectCrossComm!"),),
+              return new Scaffold(
+                appBar: AppBar(title: new Text("Welcome to Lingua!"),),
                 body: new ListView(
                   children: <Widget>[
                     new Column(
@@ -211,7 +211,7 @@ class SignInState extends State<SignIn>{
                       : "Please download the latest version of the app by clicking below"),
                   actions: <Widget>[
                     new FlatButton(onPressed: () {
-                      LaunchReview.launch(iOSAppId: "1448567515");
+                      LaunchReview.launch();
                     }, child: new Text("Click here to update the app!"))
                   ],
 
