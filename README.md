@@ -4,7 +4,7 @@ This is the production branch for the website. For God's sake check your changes
 #### Contributors:
 Tejas Mehta  
 Agranya Ketha  
-Ben Osias
+Ben Osias               
 Elijah Uribe  
 Frank Gomes  
 Connor McDermid
