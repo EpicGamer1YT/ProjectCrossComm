@@ -8,19 +8,23 @@
             margin: 0;
         }
         body {
-            background: black;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         canvas {
-            border: 1px solid white;
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
+<h1 style = align-items: >Welcome to our hidden Snake game</h1>
+<h1></h1>
+<h10>This game was created by Straker on github: His <a href = https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4>Github</a></h10>
 <canvas width="400" height="400" id="game"></canvas>
 <script>
+
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
     var grid = 16;
