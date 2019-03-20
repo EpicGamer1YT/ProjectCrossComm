@@ -86,9 +86,9 @@ html {
     alignment: center;
 }
 a{
-    padding: 0px 0px 0px 0px;
+padding: 0px 0px 0px 0px;
     color: #f9fffb;
-    margin-left: 55px;
+    margin-left: 15%;
 
 
 }
@@ -120,7 +120,28 @@ p82{
     margin-left:3%;
     color: white;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+span{
+    color: white;
+    margin-top: 20%;
+}
 
 
 
