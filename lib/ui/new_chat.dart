@@ -170,52 +170,120 @@ class NewChatState extends State<NewChat> {
   void chatMake(String natUid, String oUid, String email, String name) async {
     FirebaseUser user = await _auth.currentUser();
     FirebaseDatabase db = new FirebaseDatabase();
-    _scaffoldKey.currentState.showSnackBar(new SnackBar(content: new Text("Creating Encrypted chat...")));
-    var keyParams = new RSAKeyGeneratorParameters(new BigInt.from(65537), 2048, 5);
-    var secureRandom = new FortunaRandom();
-    var random = new Random.secure();
-    List<int> seeds = [];
-    for (int i = 0; i < 32; i++) {
-      seeds.add(random.nextInt(255));
+    DataSnapshot msgsChk = await db.reference().child("chats").child("$natUid $oUid").child(user.uid).child("messages").once();
+    DataSnapshot msgsChl2 = await db.reference().child("chats").child("$oUid $natUid").child(user.uid).child("messages").once();
+    DataSnapshot acceptChk = await db.reference().child("chats").child("$natUid $oUid").child("accepted").once();
+    DataSnapshot acceptChk2 = await db.reference().child("chats").child("$oUid $natUid").child("accepted").once();
+    bool accept1 = false;
+    bool oAccept= false;
+    Map<String, String> accepted;
+    if (acceptChk.value != null) {
+      accepted = Map.from(acceptChk.value);
+      accept1 = accepted[user.uid] == "true" ? true : false;
+      oAccept = accepted[oUid] == "true" ? true : false;
+    } else if(acceptChk2.value != null) {
+      accepted = Map.from(acceptChk2.value);
+      accept1 = accepted[user.uid] == "true" ? true : false;
+      oAccept = accepted[oUid] == "true" ? true : false;
     }
-    secureRandom.seed(new api.KeyParameter(new Uint8List.fromList(seeds)));
+    if (msgsChk.value != null && (accept1|| oAccept)) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ChatsView(
+          oDisp: name,
+          natUid: user.uid,
+          uidChat: "$natUid $oUid",
+          oUid: oUid,
+          accepted: accept1,
+          otherAccept: oAccept,
+        )),
+      );
+    } else if (msgsChl2.value != null && (accept1 || oAccept)) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ChatsView(
+          oDisp: name,
+          natUid: user.uid,
+          uidChat: "$oUid $natUid",
+          oUid: oUid,
+          accepted: accept1,
+          otherAccept: oAccept,
+        )),
+      );
+    } else {
+      _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(content: new Text("Creating Encrypted chat...")));
+      var keyParams = new RSAKeyGeneratorParameters(
+          new BigInt.from(65537), 2048, 5);
+      var secureRandom = new FortunaRandom();
+      var random = new Random.secure();
+      List<int> seeds = [];
+      for (int i = 0; i < 32; i++) {
+        seeds.add(random.nextInt(255));
+      }
+      secureRandom.seed(new api.KeyParameter(new Uint8List.fromList(seeds)));
 
-    var rngParams = new api.ParametersWithRandom(keyParams, secureRandom);
-    var k = new RSAKeyGenerator();
-    k.init(rngParams);
-    var keyPair = k.generateKeyPair();
-    var topLevel = new ASN1Sequence();
-    RSAPrivateKey privateKey = keyPair.privateKey;
-    RSAPublicKey publicKey = keyPair.publicKey;
-    String pubKey = "${encodePublicKeyToPemPKCS1(publicKey)}";
-    String privKey = "${encodePrivateKeyToPemPKCS1(privateKey)}";
-    
-    db.reference().child("chats").child("$natUid $oUid").child(user.uid).child("pubKey").set(encodePublicKeyToPemPKCS1(publicKey));
-    db.reference().child("chats").child("$natUid $oUid").child(user.uid).child("privKey").set(encodePrivateKeyToPemPKCS1(privateKey));
-    db.reference().child("chats").child("$natUid $oUid").child("accepted").child(user.uid).set("true");
-    db.reference().child("chats").child("$natUid $oUid").child("accepted").child(oUid).set("false");
-    db.reference().child("chats").child("$natUid $oUid").child(oUid).child("info").child("email").set(email);
-    db.reference().child("chats").child("$natUid $oUid").child(oUid).child("info").child("name").set(name);
-    db.reference().child("chats").child("$natUid $oUid").child(user.uid).child("info").child("email").set(user.email);
-    db.reference().child("chats").child("$natUid $oUid").child(user.uid).child("info").child("name").set(user.displayName);
-    db.reference().child("users").child("emailConv").child(user.email.replaceAll(".", ",")).child("chats").child(oUid).set("true");
-    db.reference().child("users").child("emailConv").child(email.replaceAll(".", ",")).child("chats").child(natUid).set("false");
-//    RsaKeyHelper helper = new RsaKeyHelper();
-//    var cipher = new RSAEngine()..init( true, new api.PublicKeyParameter<RSAPublicKey>(helper.parsePublicKeyFromPem(pubKey)));
-//    var cipherText = cipher.process(new Uint8List.fromList("Woahahhhhahdhhsdah".codeUnits));
-//    RSAPrivateKey priv = helper.parsePrivateKeyFromPem(privKey);
-//    print("Encrypted: ${new String.fromCharCodes(cipherText)}");
-//    cipher.init( false, new api.PrivateKeyParameter<RSAPrivateKey>(helper.parsePrivateKeyFromPem(privKey)));
-//    var cipher2 = new RSAEngine()..init(false, new api.PrivateKeyParameter<RSAPrivateKey>(priv));
+      var rngParams = new api.ParametersWithRandom(keyParams, secureRandom);
+      var k = new RSAKeyGenerator();
+      k.init(rngParams);
+      var keyPair = k.generateKeyPair();
+      RSAPrivateKey privateKey = keyPair.privateKey;
+      RSAPublicKey publicKey = keyPair.publicKey;
+      String pubKey = "${encodePublicKeyToPemPKCS1(publicKey)}";
+      String privKey = "${encodePrivateKeyToPemPKCS1(privateKey)}";
+
+      db.reference().child("chats").child("$natUid $oUid")
+          .child(user.uid)
+          .child("pubKey")
+          .set(encodePublicKeyToPemPKCS1(publicKey));
+      db.reference().child("chats").child("$natUid $oUid")
+          .child(user.uid)
+          .child("privKey")
+          .set(encodePrivateKeyToPemPKCS1(privateKey));
+      db.reference().child("chats").child("$natUid $oUid")
+          .child("accepted")
+          .child(user.uid)
+          .set("true");
+      db.reference().child("chats").child("$natUid $oUid")
+          .child("accepted")
+          .child(oUid)
+          .set("false");
+      db.reference().child("chats").child("$natUid $oUid").child(oUid).child(
+          "info").child("email").set(email);
+      db.reference().child("chats").child("$natUid $oUid").child(oUid).child(
+          "info").child("name").set(name);
+      db.reference().child("chats").child("$natUid $oUid").child(user.uid)
+          .child("info").child("email")
+          .set(user.email);
+      db.reference().child("chats").child("$natUid $oUid").child(user.uid)
+          .child("info").child("name")
+          .set(user.displayName);
+      db.reference().child("users").child("emailConv").child(
+          user.email.replaceAll(".", ",")).child("chats").child(oUid).set(
+          "true");
+      db.reference().child("users").child("emailConv").child(
+          email.replaceAll(".", ",")).child("chats").child(natUid).set("false");
+      RsaKeyHelper helper = new RsaKeyHelper();
+      var cipher = new RSAEngine()
+        ..init(true, new api.PrivateKeyParameter<RSAPrivateKey>(
+            helper.parsePrivateKeyFromPem(privKey)));
+      var cipherText = cipher.process(
+          new Uint8List.fromList("Woahahhhhahdhhsdah".codeUnits));
+      RSAPrivateKey priv = helper.parsePrivateKeyFromPem(privKey);
+      print("Encrypted: ${new String.fromCharCodes(cipherText)}");
+      cipher.init(false, new api.PublicKeyParameter<RSAPublicKey>(
+          helper.parsePublicKeyFromPem(pubKey)));
+//    var cipher2 = new RSAEngine()..init(true, new api.PrivateKeyParameter<RSAPrivateKey>(priv));
 //    var decrypt = cipher2.process(cipherText);
-//    //cipher.init( false, new PrivateKeyParameter(keyPair.privateKey) )
-//    var decrypted = cipher.process(cipherText);
+      //cipher.init( false, new PrivateKeyParameter(keyPair.privateKey) )
+      var decrypted = cipher.process(cipherText);
 //    print("decrypt2: ${new String.fromCharCodes(decrypt)}");
-//    print("Decrypted: ${new String.fromCharCodes(decrypted)}");
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ChatsHome()),
-    );
+      print("Decrypted: ${new String.fromCharCodes(decrypted)}");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ChatsHome()),
+      );
+    }
   }
   String encodePublicKeyToPemPKCS1(RSAPublicKey publicKey) {
     var topLevel = new ASN1Sequence();

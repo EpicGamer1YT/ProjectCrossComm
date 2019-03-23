@@ -27,7 +27,7 @@ class Bubble extends StatelessWidget {
     );
     return Row(
       children: <Widget>[
-        new CircleAvatar(
+        isMe ? new CircleAvatar(
           maxRadius: 15.0,
           minRadius: 3.0,
           backgroundColor: Colors
@@ -39,7 +39,7 @@ class Bubble extends StatelessWidget {
               fontSize: 15.0,
             ),
           ),
-        ),
+        ) : new Container(),
         new Expanded(child: Column(
           mainAxisAlignment: align2,
           crossAxisAlignment: align,
@@ -61,7 +61,7 @@ class Bubble extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(right: 48.0),
+                    padding: EdgeInsets.only(right: 20.0, bottom: 15.0),
                     child: Text(message, style: Theme.of(context).textTheme.display1,),
                   ),
                   Positioned(
