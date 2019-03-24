@@ -6,68 +6,81 @@
 }
 /* Fonts from Google Fonts - more at https://fonts.google.com */
 
+h1.yeet {
+    color: black;
+    font-size: 50px;
+}
+span.teey {
+    color: #cb0000;
+}
+span.yeey {
+    color: green;
+}
+head {
+    text-align: left;
+}
 body {
-    background-color: DodgerBlue;
-    font-family: "Open Serif", sans-serif;
+    background-color: #c3a10f;
+    font-family: "Lato", sans-serif;
+    color: black;
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
     color: #404040;
 }
-h12{
-    background-color: DodgerBlue;
 
+th{
+    color: white;
+    background-color: black;
+}
+li {
+    color: black;
 }
 h1 {
-    padding:0px 5px 0px 700px;
-    font-family: "Arial", serif;
+    text-align: center;
+    font-family: "Courier", serif;
+    padding: 25px 14px 5px 0px;
     font-size: 32px;
     font-weight: 500;
-    margin-top: 100px;
+    margin-top: 10px;
 }
 h2{
-    background-color: #000000;
-    font-family: "Arial", sans-serif;
-    padding: 14px 5px 0 718px;
-    font-size: 20px;
+    font-family: "Lato", sans-serif;
+    padding: 0px 0px 0px 14px;
+    font-size: 35px;
     margin: 0px;
-    color: #ffffff;
+    color: #000000;
     font-stretch:ultra-condensed;
 }
 img{
     padding: 14px 5px 0 718px;
-
 }
 p1 {
     padding: 5px 5px 5px 10px;
-
-
 }
 p2{
   padding: 1000px 80px 80px 500px;
-
-
 }
 h4{
     margin-top: 50px;
     margin-left: 800px;
     margin-right: 1035px;
-
 }
 #desc {
-    color: DodgerBlue;
-    font-family: Arial, serif;
+    text-align: center;
+    color: black;
+    font-family: Lato, serif;
     font-stretch: semi-expanded;
-    border-style: dotted;
-    margin-left: 55px;
 }
-
+#desc2 {
+    text-align: center;
+    color: black;
+    font-family: Lato, serif;
+    font-stretch: semi-expanded;
+}
 .signup {
     color: white;
-    background-color: DodgerBlue;
 }
 #link {
     color: black;
 }
-
-

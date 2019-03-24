@@ -1,15 +1,20 @@
 /*TODO: Make Ben's page look halfway decent*/
 
 p, h1, h2, h3, h4, h5, h6 {
-    font-family: Arial, serif;
-    color: black;
+    font-family: Lato, serif;
+    color: white;
 }
 #title, #subtitle {
     text-align: center;
 }
+table.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 body {
-    background-color: #9fffc8;
-    font-family: "Arial", serif;
+    background-color: #64548c;
+    font-family: "Lato", serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
@@ -17,13 +22,16 @@ body {
 #ContactUs {
     text-indent: 50px;
 }
+
 table, tr, th {
     align-content: center;
-    border: 3px solid black;
+    border: 3px solid white;
     padding: 3px;
     border-spacing: 5px;
+    color: white;
 }
 #bottombar {
-    background-color: black;
+    background-color: #64548c;
     font-family: "Times New Roman", serif;
+    font-size: 25px;
 }
