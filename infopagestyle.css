@@ -1,58 +1,45 @@
 /*TODO: Make Ben's page look halfway decent*/
 
 p, h1, h2, h3, h4, h5, h6 {
-    font-family: Arial, serif;
-    color: black;
+    font-family: Lato, serif;
+    color: white;
 }
 #title, #subtitle {
     text-align: center;
 }
+table.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 body {
     background-color: black;
-    font-family: "Arial", serif;
-    padding: 0% 0% 0% 0%;
+    font-family: "Lato", serif;
+    padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
 }
-
 #ContactUs {
     text-indent: 50px;
 }
-table, tr{
+
+table, tr, th {
     align-content: center;
     border: 3px solid white;
-    padding: .25%;
+    padding: 3px;
     border-spacing: 5px;
-    width: 100%;
+    color: white;
 }
 #bottombar {
     background-color: black;
     font-family: "Times New Roman", serif;
-}
-th{
-    color: white;
-    border: 3px solid white;
-}
-tr{
-
-}
-h1{
-    color: white;
-
-}
-h2{
-    color:white;
-
-
-}
-a{
-    color: DodgerBlue;
+    font-size: 25px;
 }
 
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
     overflow: hidden;
     background-color: #333;
 }

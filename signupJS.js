@@ -101,15 +101,3 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid, photoUrl) {
         console.log(error.code);
     });
 }
-
-/*
-function googleButtonMouseOver() {
-    var x = document.getElementById("googleButton");
-    x.style.backgroundColor = "light red";
-}
-function googleButtonMouseLeave() {
-    var x = document.getElementById("googleButton");
-    x.style.backgroundColor = "red";
-}
-
-document.getElementById("googleButton").addEventListener(onmouseover, googleButtonMouseOver());*/
