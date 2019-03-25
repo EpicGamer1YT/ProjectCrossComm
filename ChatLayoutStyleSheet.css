@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+body {
+    background-color: #000000;
+    font-family: "Open Serif", sans-serif;
+    padding: 0 14px 5px 0px;
+    font-size: 20px;
+    margin: 0;
+    color: #ffffff;
+}
+#title {
+    background-color: #ffffff;
+    font-family: "Arial", sans-serif;
+    padding: 15px 5px 0 718px;
+    font-size: 20px;
+    color: white;
+    margin: 0px;
+
+}
+#type {
+    display: block;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+h3{
+    color: white;
+}
+
+.center {
+    margin: auto;
+    width: 64.7%;
+    border: 0px solid #ffffff;
+    padding: 50px;
+    color: white;
+}
+.center2 {
+    margin: auto;
+    width: 55%;
+    border: 3px solid #ffffff;
+    padding: 100px;
+    color: white;
+}
+form {
+    display: inline-block;
+    color: white;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+label#messageLabel {
+    background-color: black;
+    color: white;
+}
