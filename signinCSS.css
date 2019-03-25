@@ -1,0 +1,70 @@
+button#signinSUBMIT {
+    color: white;
+    alignment: center;
+    background-color: blue;
+    border-color: blue;
+    width: 1080px;
+    height: 40px;
+    cursor: pointer;
+}
+.signin {
+    display: block;
+    margin: 1.0em auto;
+    text-align: center;
+}
+button#signinGOOGLEBUTTON {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: red;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
+head, body, footer {
+    background-color: black;
+}
+legend {
+    color: white;
+}
+form.signin {
+    background-color: black;
+    color: white;
+}
+label.signin {
+    color: white;
+}
+
+fieldset.signin {
+    color: white;
+    alignment: center;
+}
+h1, h2, h3, h4, h5, h6, p {
+    color: white;
+    background-color: black;
+}
+ul {
+    list-style-type: none;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
