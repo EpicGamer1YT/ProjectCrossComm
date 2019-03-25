@@ -13,7 +13,7 @@ table.center {
     margin-right: auto;
 }
 body {
-    background-color: #64548c;
+    background-color: black;
     font-family: "Lato", serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
@@ -31,7 +31,31 @@ table, tr, th {
     color: white;
 }
 #bottombar {
-    background-color: #64548c;
+    background-color: black;
     font-family: "Times New Roman", serif;
     font-size: 25px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
 }

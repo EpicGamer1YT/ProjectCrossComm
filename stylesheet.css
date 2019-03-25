@@ -6,8 +6,16 @@
 }
 /* Fonts from Google Fonts - more at https://fonts.google.com */
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
+
+.important {
+    /* This is for critical elements that should not be touched without asking*/
+}
+/* Fonts from Google Fonts - more at https://fonts.google.com */
+
 h1.yeet {
-    color: black;
+    color: white;
     font-size: 50px;
 }
 span.teey {
@@ -20,9 +28,9 @@ head {
     text-align: left;
 }
 body {
-    background-color: #c3a10f;
+    background-color: black;
     font-family: "Lato", sans-serif;
-    color: black;
+    color: white;
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
@@ -34,7 +42,7 @@ th{
     background-color: black;
 }
 li {
-    color: black;
+    color: white;
 }
 h1 {
     text-align: center;
@@ -49,7 +57,7 @@ h2{
     padding: 0px 0px 0px 14px;
     font-size: 35px;
     margin: 0px;
-    color: #000000;
+    color: white;
     font-stretch:ultra-condensed;
 }
 img{
@@ -59,7 +67,7 @@ p1 {
     padding: 5px 5px 5px 10px;
 }
 p2{
-  padding: 1000px 80px 80px 500px;
+    padding: 1000px 80px 80px 500px;
 }
 h4{
     margin-top: 50px;
@@ -68,13 +76,13 @@ h4{
 }
 #desc {
     text-align: center;
-    color: black;
+    color: white;
     font-family: Lato, serif;
     font-stretch: semi-expanded;
 }
 #desc2 {
-    text-align: center;
-    color: black;
+    text-align: left;
+    color: white;
     font-family: Lato, serif;
     font-stretch: semi-expanded;
 }
@@ -82,5 +90,114 @@ h4{
     color: white;
 }
 #link {
+    color: white;
+}
+
+
+
+
+
+
+h12{
+    background-color:#000000;
+
+}
+
+img{
+    padding: 0% 0% 0% 40%;
+
+}
+p1 {
+    padding: 5px 5px 5px 10px;
+
+
+}
+p2{
+    padding: 1000px 80px 80px 500px;
+
+
+}
+h4{
+    margin-top: 50px;
+    margin-left: 800px;
+    margin-right: 1035px;
+
+}
+
+.signup {
+    color: white;
+    background-color: DodgerBlue;
+}
+#link {
+    color: black;
+}
+#hiddenaccountcreation {
+    display: none;
+}
+#hiddensignin {
+    display: none;
+}
+html {
+    alignment: center;
+}
+a{
+    padding: 0px 0px 0px 0px;
+    color: #f9fffb;
+    margin-left: 15%;
+
+
+}
+ul {
+    list-style-type: none;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+p82{
+    margin-left:3%;
+    color: white;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+span{
+    color: white;
+    margin-top: 20%;
+}
+
+a13{
     color: black;
 }
