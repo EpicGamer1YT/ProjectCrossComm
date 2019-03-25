@@ -29,37 +29,37 @@
     <link href="signupCSS.css" rel="stylesheet">
 </head>
 <body>
-    <div id="signupDIV" class="signup">
-        <form id="signupFORM" class="signup" method="post" action="signupJS.js">
-            <fieldset>
-                <legend>Sign Up</legend>
-                <p>
-                    <label for="signupNAME" id="signupNAMELABEL" class="signup">Username:</label>
-                    <input id="signupNAME" class="signup" type="text">
-                </p>
-                <p>
-                    <label for="signupEMAIL" id="signupEMAILLABEL" class="signup">Email:</label>
-                    <input id="signupEMAIL" class="signup" type="email">
-                </p>
-                <p>
-                    <label for="signupPASS" id="signupPASSLABEL" class="signup">Password:</label>
-                    <input id="signupPASS" class="signup" type="password">
-                </p>
-                <p>
-                    <button type="submit" id="signupSUBMIT" class="signup" onclick="signUpWithEmail()">SUBMIT</button>
-                </p>
-            </fieldset>
-        </form>
-    </div>
-    <div id="signupGoogle" class="signup">
-        <form id="googleFORM" class="signup">
-            <fieldset>
-                <legend>GOOGLE SIGN IN</legend>
-                <p>
-                    <button id="googleButton" class="signup" type="button" onclick="googleSignIn()">Sign In With Google</button>
-                </p>
-            </fieldset>
-        </form>
-    </div>
+<div id="signupDIV" class="signup">
+    <form id="signupFORM" class="signup" method="post" action="signupJS.js">
+        <fieldset>
+            <legend>Sign In</legend>
+            <p>
+                <label for="signupNAME" id="signupNAMELABEL" class="signup">Username:</label>
+                <input id="signupNAME" class="signup" type="text">
+            </p>
+            <p>
+                <label for="signupEMAIL" id="signupEMAILLABEL" class="signup">Email:</label>
+                <input id="signupEMAIL" class="signup" type="email">
+            </p>
+            <p>
+                <label for="signupPASS" id="signupPASSLABEL" class="signup">Password:</label>
+                <input id="signupPASS" class="signup" type="password">
+            </p>
+            <p>
+                <button type="submit" id="signupSUBMIT" class="signup" onclick="signUpWithEmail()">SUBMIT</button>
+            </p>
+        </fieldset>
+    </form>
+</div>
+<div id="signupGoogle" class="signup">
+    <form id="googleFORM" class="signup">
+        <fieldset>
+            <legend>GOOGLE SIGN IN</legend>
+            <p>
+                <button id="googleButton" class="signup" type="button" onclick="googleSignIn()">Sign In With Google</button>
+            </p>
+        </fieldset>
+    </form>
+</div>
 </body>
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
+            authDomain: "projectcrosscomm.firebaseapp.com",
+            databaseURL: "https://projectcrosscomm.firebaseio.com",
+            projectId: "projectcrosscomm",
+            storageBucket: "projectcrosscomm.appspot.com",
+            messagingSenderId: "412861101382"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
+    <link rel="stylesheet" href="signinCSS.css">
+    <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="InfoPage.html">Information</a></li>
+        <li><a href="ChatLayout.html">Chat</a></li>
+        <li><a href="ChatLayoutGC.html"> Group Chat</a></li>
+        <li><a href="https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661">Privacy Policy</a></li>
+        <li><a href="signin.html">Sign In</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+
+    </ul>
+</head>
+<body>
+    <div id="signinDIV" class="signin">
+        <form method="post" class="signin" id="signinFORM">
+            <fieldset>
+                <legend>Sign In to Quetzal</legend>
+                <label for="signinEMAIL">Email:</label>
+                <input type="email" id="signinEMAIL" class="signin" placeholder="email">
+                <label for="signinPASS">Password</label>
+                <input id="signinPASS" class="signin" type="password" placeholder="password">
+                <button id="signinSUBMIT" class="signin" type="button" onclick="signIN()">SUBMIT</button>
+            </fieldset>
+        </form>
+    </div>
+    <div id="signinGOOGLEDIV" class="signin">
+        <form method="post" class="signin" id="signinGOOGLEFORM">
+            <fieldset>
+                <legend>Google Sign In</legend>
+                <button id="signinGOOGLEBUTTON" class="signin" onclick="googleSignIn()">Sign In With Google</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+<footer>
+    <script src="signin.html"></script>
+</footer>
+</html>
