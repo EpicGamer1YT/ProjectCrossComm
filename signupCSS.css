@@ -1,0 +1,48 @@
+head, body, footer {
+    background-color: black;
+}
+legend {
+    color: white;
+}
+form.signup {
+    background-color: black;
+    color: white;
+}
+label.signup {
+    color: white;
+}
+
+fieldset.signup {
+    color: white;
+    alignment: center;
+}
+h1, h2, h3, h4, h5, h6, p {
+    color: white;
+    background-color: black;
+}
+
+button#signupSUBMIT {
+    color: white;
+    alignment: center;
+    background-color: blue;
+    border-color: blue;
+    width: 1080px;
+    height: 40px;
+    cursor: pointer;
+}
+.signup {
+    display: block;
+    margin: 1.0em auto;
+    text-align: center;
+}
+button#googleButton {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: red;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
