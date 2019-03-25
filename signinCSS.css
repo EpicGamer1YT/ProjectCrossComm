@@ -1,27 +1,4 @@
-head, body, footer {
-    background-color: black;
-}
-legend {
-    color: white;
-}
-form.signup {
-    background-color: black;
-    color: white;
-}
-label.signup {
-    color: white;
-}
-
-fieldset.signup {
-    color: white;
-    alignment: center;
-}
-h1, h2, h3, h4, h5, h6, p {
-    color: white;
-    background-color: black;
-}
-
-button#signupSUBMIT {
+button#signinSUBMIT {
     color: white;
     alignment: center;
     background-color: blue;
@@ -30,12 +7,12 @@ button#signupSUBMIT {
     height: 40px;
     cursor: pointer;
 }
-.signup {
+.signin {
     display: block;
     margin: 1.0em auto;
     text-align: center;
 }
-button#googleButton {
+button#signinGOOGLEBUTTON {
     display: block;
     width: 100%;
     border: none;
@@ -45,6 +22,28 @@ button#googleButton {
     cursor: pointer;
     text-align: center;
     color: white;
+}
+head, body, footer {
+    background-color: black;
+}
+legend {
+    color: white;
+}
+form.signin {
+    background-color: black;
+    color: white;
+}
+label.signin {
+    color: white;
+}
+
+fieldset.signin {
+    color: white;
+    alignment: center;
+}
+h1, h2, h3, h4, h5, h6, p {
+    color: white;
+    background-color: black;
 }
 ul {
     list-style-type: none;

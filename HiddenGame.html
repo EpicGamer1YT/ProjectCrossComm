@@ -8,7 +8,7 @@
             margin: 0;
         }
         body {
-            background: black;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -18,9 +18,13 @@
         }
     </style>
 </head>
-<body>
+<body style = "background-color: black;">
+<h1 style = "color: white; ">Welcome To Our Hidden Snake Game</h1>
+<h1></h1>
+
 <canvas width="400" height="400" id="game"></canvas>
 <script>
+
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
     var grid = 16;
@@ -146,5 +150,6 @@
     // start the game
     requestAnimationFrame(loop);
 </script>
+<h10 style = "color: white;">This game was created by Straker on github: His <a href = https://gist.github.com/straker/ff00b4b49669ad3dec890306d348adc4>Github</a></h10>
 </body>
 </html>
