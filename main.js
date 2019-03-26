@@ -232,6 +232,17 @@ function signInUser() { //Uses email sign-in so signin to existing account
     });
 }*/
 
-function searchForEmail() {
+function google() { //DEPRECATED
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
+    firebase.auth().languageCode = 'en';
+
+    firebase.auth().signInWithPopup(provider).then ( (result) => {
+        var token = result.credential.accessToken;
+        var user = result.user;
+    }).catch( (error) => {
+        console.log(error.code);
+        console.log(error.message);
+    });
 }

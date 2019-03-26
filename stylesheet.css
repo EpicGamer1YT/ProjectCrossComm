@@ -74,13 +74,13 @@ h4{
     margin-left: 800px;
     margin-right: 1035px;
 }
-#desc {
+.desc {
     text-align: center;
     color: white;
     font-family: Lato, serif;
     font-stretch: semi-expanded;
 }
-#desc2 {
+.desc2 {
     text-align: left;
     color: white;
     font-family: Lato, serif;
