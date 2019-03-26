@@ -51,6 +51,7 @@ h1 {
     font-size: 32px;
     font-weight: 500;
     margin-top: 10px;
+
 }
 h2{
     font-family: "Lato", sans-serif;
@@ -59,6 +60,7 @@ h2{
     margin: 0px;
     color: white;
     font-stretch:ultra-condensed;
+    margin-left: 37%;
 }
 img{
     padding: 14px 5px 0 718px;
@@ -104,7 +106,10 @@ h12{
 }
 
 img{
-    padding: 0% 0% 0% 40%;
+    padding: 0% 0% 0% 0%;
+    height: 15%;
+    width: 15%;
+    margin-left: 40%;
 
 }
 p1 {
@@ -121,6 +126,7 @@ h4{
     margin-top: 50px;
     margin-left: 800px;
     margin-right: 1035px;
+
 
 }
 
@@ -200,4 +206,8 @@ span{
 
 a13{
     color: black;
+}
+#desc2{
+    padding: 0% 0% 0% 0%;
+    margin-left: 7%;
 }
