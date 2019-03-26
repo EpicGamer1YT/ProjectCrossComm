@@ -15,10 +15,12 @@ var targetUID;
 
 function searchEmails(email) {
     var username;
-    database.ref("/users/emailConv/" + email).once().then(function(snapshot) {
+    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
         //On completion
-        username = (snapshot.val() && snapshot.val().username);
+        target = snapshot.val();
+        username = (snapshot.val() && snapshot.val().name);
         remoteEmail  = (snapshot.val() && snapshot.val().email);
+        console.log(snapshot.val());
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
