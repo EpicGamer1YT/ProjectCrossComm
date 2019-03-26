@@ -15,10 +15,12 @@ var targetUID;
 
 function searchEmails(email) {
     var username;
-    database.ref("/users/emailConv/" + email).once().then(function(snapshot) {
+    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
         //On completion
-        username = (snapshot.val() && snapshot.val().username);
+        target = snapshot.val();
+        username = (snapshot.val() && snapshot.val().name);
         remoteEmail  = (snapshot.val() && snapshot.val().email);
+        console.log(snapshot.val());
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
@@ -105,6 +107,25 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
             console.log(error.message);
             console.log(error.code);
         });
+    }
+}
+function fetcher() {
+    var date = new Date();
+    var timestamp = date.getTime();
+    var localuuid = firebase.auth().currentUser().uid;
+    var localEmail = firebase.auth().currentUser().email;
+    var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
+    if (position) {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
+            var newpost = data.val();
+            const ordered = {};
+            Object.keys(newpost).sort().forEach( (key) => {
+                ordered[key] = newpost[key];
+            });
+            for (var i = 0; i < ordered.length; i++) {
+
+            }
+        })
     }
 }
 
