@@ -17,8 +17,8 @@ function searchEmails(email) {
     var username;
     database.ref("/users/emailConv/" + email).once().then(function(snapshot) {
         //On completion
-       username = (snapshot.val() && snapshot.val().username);
-       remoteEmail  = (snapshot.val() && snapshot.val().email);
+        username = (snapshot.val() && snapshot.val().username);
+        remoteEmail  = (snapshot.val() && snapshot.val().email);
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
@@ -86,18 +86,26 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
     var localEmail = firebase.auth().currentUser().email;
     var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
     if (position) {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/messages").set({
-            timestamp:  document.getElementById("sendmessage").value,
+        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
+            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
+            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "sender": localuuid,
+            "time": date.getHours() + "." + date.getMinutes(),
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/messages").set({
-            timestamp:  document.getElementById("sendmessage").value,
+        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/" + timestamp).set({
+            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
+            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "sender": localuuid,
+            "time": date.getHours() + "." + date.getMinutes(),
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);
         });
     }
 }
+
+
