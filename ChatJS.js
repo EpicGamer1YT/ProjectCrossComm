@@ -109,5 +109,18 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
         });
     }
 }
+function fetcher() {
+    var date = new Date();
+    var timestamp = date.getTime();
+    var localuuid = firebase.auth().currentUser().uid;
+    var localEmail = firebase.auth().currentUser().email;
+    var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
+    if (position) {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
+            var newpost = data.val();
+            document.getElementById("textfield").innerText = newpost.
+        })
+    }
+}
 
 
