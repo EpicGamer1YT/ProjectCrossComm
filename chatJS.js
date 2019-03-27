@@ -8,6 +8,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
+var userkey;
 var remoteEmail;
 var target;
 var local;
@@ -64,7 +65,7 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
 function generateKeyPair() {
     var passPhrase = document.getElementById("passInput").value;
     var bits = 1024;
-    var userkey = cryptico.generateRSAKey(passPhrase, bits);
+    userkey = cryptico.generateRSAKey(passPhrase, bits);
     var userPubKey = cryptico.publicKeyString(userkey);
     startChat(firebase.auth().currentUser(), userkey, userPubKey);
 }
@@ -121,13 +122,27 @@ function fetcher() {
             Object.keys(newpost).sort();
             console.log(newpost);
             const ordered = Object.keys(newpost).sort();
-            Object.keys(newpost).map(function(key, index) {
+            Object.keys(newpost).map((key, index) => {
                 console.log(newpost[key]['message']); //{Prints encrypted message(all messages looped)
                 console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
                 console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
                 console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
+                var decrypt = cryptico.decrypt(newpost[key]['message'], userkey).plaintext;
+
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + newpost[key]['sender'] + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + decrypt + "</span>");
+            }).catch( (error) => {
+                console.log(error.message);
+                console.log(error.code);
             });
-        })
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
     }
 }
 
