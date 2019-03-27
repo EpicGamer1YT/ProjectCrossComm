@@ -27,11 +27,18 @@
         </form>
     </div>
     <div id="newchat">
-        <form method="post" id="findNewChat" class="findChat">
+        <form action="chatJS.js" method="post" id="findNewChat" class="findChat">
             <label for="findEmail" class="findChat">Search Emails</label>
             <input id="findEmail" type="email" class="findChat">
             <input id="findEmailSubmit" class="findChat" onclick="splitter()" type="submit">
         </form>
+        <div id="hiddenPass" class="encrypt">
+            <form action="chatJS.js" method="post" id="encryptForm" class="encrypt">
+                <label for="passInput" id="passLabel" class="encrypt">Encryption Passphrase</label>
+                <input id="passInput" class="encrypt" type="password" placeholder="Encryption Key">
+                <button id="submit" value="" class="encrypt" onclick="generateKeyPair()">SUBMIT</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

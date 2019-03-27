@@ -1,4 +1,3 @@
-require("https://www.gstatic.com/firebasejs/5.8.5/firebase.js");
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -8,15 +7,11 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
-require("https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js");
-require("https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js");
-require("https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js");
 var database = firebase.database();
 var remoteEmail;
 var target;
 var local;
 var targetUID;
-var userkey;
 
 function searchEmails(email) {
     var username;
@@ -68,9 +63,9 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
 }
 
 function generateKeyPair() {
-    var passPhrase = "Your Mother Was A Hamster";
+    var passPhrase = document.getElementById("passInput").value;
     var bits = 1024;
-    userkey = cryptico.generateRSAKey(passPhrase, bits);
+    var userkey = cryptico.generateRSAKey(passPhrase, bits);
     var userPubKey = cryptico.publicKeyString(userkey);
     startChat(firebase.auth().currentUser(), userkey, userPubKey);
 }
@@ -122,67 +117,16 @@ function fetcher() {
     var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
     if (position) {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
-            let chatField = document.getElementById("textfield");
             var newpost = data.val();
-            console.log(newpost);
-            Object.keys(newpost).sort();
-            console.log(newpost);
-            const ordered = Object.keys(newpost).sort();
-            var targetName;
-            Object.keys(newpost).map(function(key, index) {
-                console.log(cryptico.decrypt(newpost[key]['message'], userkey).plaintext); //Prints encrypted message(all messages looped)
-                console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
-                console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
-                console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
-
-                database.ref("/chats/" + localuuid + " " + targetUID + "/" + newpost[key]['sender'] + "/name").once('name').then( (snapshot) => {
-                    targetName = (snapshot.val() && snapshot.val().name) || "Anonymous";
-                }).catch( (error) => {
-                    console.log(error.message);
-                    console.log(error.code);
-                });
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + targetName + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + cryptico.decrypt(newpost[key]['message'], userkey).plaintext + "</span>");
-
+            const ordered = {};
+            Object.keys(newpost).sort().forEach( (key) => {
+                ordered[key] = newpost[key];
             });
-        });
-    } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
-            let chatField = document.getElementById("textfield");
-            var newpost = data.val();
-            console.log(newpost);
-            Object.keys(newpost).sort();
-            console.log(newpost);
-            const ordered = Object.keys(newpost).sort();
-            var targetName;
-            Object.keys(newpost).map(function(key, index) {
-                console.log(cryptico.decrypt(newpost[key]['message'], userkey).plaintext); //Prints encrypted message(all messages looped)
-                console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
-                console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
-                console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
+            for (var i = 0; i < ordered.length; i++) {
 
-                database.ref("/chats/" + localuuid + " " + targetUID + "/" + newpost[key]['sender'] + "/name").once('name').then( (snapshot) => {
-                    targetName = (snapshot.val() && snapshot.val().name) || "Anonymous";
-                }).catch( (error) => {
-                    console.log(error.message);
-                    console.log(error.code);
-                });
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + targetName + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + cryptico.decrypt(newpost[key]['message'], userkey).plaintext + "</span>");
-
-            });
-        });
+            }
+        })
     }
 }
-
-
 
 
