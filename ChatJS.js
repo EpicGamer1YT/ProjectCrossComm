@@ -12,7 +12,6 @@ var remoteEmail;
 var target;
 var local;
 var targetUID;
-
 function searchEmails(email) {
     var username;
     database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
@@ -118,13 +117,16 @@ function fetcher() {
     if (position) {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
             var newpost = data.val();
-            const ordered = {};
-            Object.keys(newpost).sort().forEach( (key) => {
-                ordered[key] = newpost[key];
+            console.log(newpost);
+            Object.keys(newpost).sort();
+            console.log(newpost);
+            const ordered = Object.keys(newpost).sort();
+            Object.keys(newpost).map(function(key, index) {
+                console.log(newpost[key]['message']); //{Prints encrypted message(all messages looped)
+                console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
+                console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
+                console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
             });
-            for (var i = 0; i < ordered.length; i++) {
-
-            }
         })
     }
 }
