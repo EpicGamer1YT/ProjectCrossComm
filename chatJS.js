@@ -14,7 +14,7 @@ var local;
 var targetUID;
 function searchEmails(email) {
     var username;
-    database.ref("/users/emailConv/" + email).on().then( (snapshot) => {
+    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
         //On completion
         target = snapshot.val();
         username = (snapshot.val() && snapshot.val().name);
@@ -127,7 +127,10 @@ function fetcher() {
                 console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
                 console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
             });
-        })
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
     }
 }
 
