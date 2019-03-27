@@ -7,6 +7,9 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 var database = firebase.database();
 function showAccCreate() { //Hides and shows account create button
     var x = document.getElementById("hiddenaccountcreation");

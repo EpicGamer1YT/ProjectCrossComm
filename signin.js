@@ -7,7 +7,9 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
-
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 function signIN() {
     var email = document.getElementById("signinEMAIL");
     var pass = document.getElementById("signinPASS");
