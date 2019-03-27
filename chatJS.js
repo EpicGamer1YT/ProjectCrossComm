@@ -127,10 +127,7 @@ function fetcher() {
                 console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
                 console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
             });
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
+        })
     }
 }
 
