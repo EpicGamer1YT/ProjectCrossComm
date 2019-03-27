@@ -7,6 +7,9 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 var database = firebase.database();
 var userkey;
 var remoteEmail;
@@ -135,6 +138,7 @@ function fetcher() {
                 $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
                 // noinspection JSJQueryEfficiency
                 $("#chatField").append("<span>" + decrypt + "</span>");
+
             }).catch( (error) => {
                 console.log(error.message);
                 console.log(error.code);
@@ -145,5 +149,6 @@ function fetcher() {
         });
     }
 }
+window.onload = fetcher();
 
 

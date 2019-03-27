@@ -1,0 +1,7 @@
+{
+  "name": "ProjectCrossComm",
+  "version": "1.0.0",
+  "dependencies": {
+    "firebase": "^5.9.1"
+  }
+}
