@@ -14,7 +14,7 @@ var local;
 var targetUID;
 function searchEmails(email) {
     var username;
-    database.ref("/users/emailConv/" + email).on().then( (snapshot) => {
+    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
         //On completion
         target = snapshot.val();
         username = (snapshot.val() && snapshot.val().name);
