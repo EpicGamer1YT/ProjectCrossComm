@@ -46,7 +46,7 @@
             background-color: #111;
         }
     </style>
-
+    <script src="ChatJS.js"></script>
 </head>
 <body style = "background-color: black;">
 <ul>
@@ -54,15 +54,18 @@
     <li><a href="InfoPage.html">Information</a></li>
     <li><a href="ChatLayout.html">Chat</a></li>
     <li><a href="ChatLayoutGC.html">Groupchat</a></li>
-    <li><a href="https://accounts.google.com/signin/oauth/oauthchooseaccount?hl=en&client_id=412861101382-82aanbovm04f03v5213a1r2gcr2tr4cp.apps.googleusercontent.com&as=T7XsLmmpTa2e0shphFJ4Fg&destination=https%3A%2F%2Fprojectcrosscomm.firebaseapp.com&approval_state=!ChRoemoxTDliWFZ2b2k0NmFYQWY5VRIfazV2SnVwZWw2R2NTc0NEZU1wUEotOWJwTmVEQ2x4WQ%E2%88%99AJDr988AAAAAXIuauDVwBq5zKCvXY9N-bNGaW2p6gFb-&oauthgdpr=1&oauthriskyscope=1&xsrfsig=ChkAeAh8TwAD2H1fgKlA8ZwzCbeTQPZrcm-xEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow">Sign Up</a></li>
 </ul>
 <h1 style = "color: white;" id= "title">Welcome To Your Private Groupchat Room!</h1>
 <h3 style = "color: white;">Invite your friends to start chatting</h3>
-<div class = center2 placeholder = "Display Text Here">Your texts will appear here</div>
-<div class= center>
-    <h10 id = lol; style = "margin-top: 0px; margin-left: 10px;" >Number of users in the chat: </h10> <!--Add a counter for how many people are in here-->
+<div class = "center2" placeholder = "Display Text Here" id="textfield">
+    <span class="leftAlign" id="chatSPAN">
+
+    </span>
+</div>
+<div class= "center">
+    <h10 id = "lol"; style = "margin-top: 0px; margin-left: 10px;" >Number of users in the chat: </h10> <!--Add a counter for how many people are in here-->
     <h1></h1>
-    <form action="">
+    <form method="post">
         <input type="text" name="Type" placeholder="Type Here"><br>
         <input type="submit" value="Send">
     </form>
