@@ -1,5 +1,5 @@
 p, h1, h2, h3, h4, h5, h6 {
-    font-family: Lato, serif;
+
     color: white;
 }
 #title, #subtitle {
@@ -12,7 +12,7 @@ table.center {
 }
 body {
     background-color: black;
-    font-family: "Lato", serif;
+
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
@@ -30,7 +30,7 @@ table, tr, th {
 }
 #bottombar {
     background-color: black;
-    font-family: "Times New Roman", serif;
+
     font-size: 25px;
 }
 

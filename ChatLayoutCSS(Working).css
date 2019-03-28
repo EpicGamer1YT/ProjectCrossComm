@@ -1,0 +1,54 @@
+body{
+    background-color: black;
+    color: white;
+    background-image: linear-gradient(to right, #000000, #000000, #000000, #000000, #00004d);
+}
+ul {
+    list-style-type: none;
+    margin: 0%;
+    padding: 0% 0% 0% 0%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+h1{
+    margin-left: 33%;
+}
+h3{
+    margin-left: 39%;
+}
+.center2 {
+    margin: auto;
+    width: 55%;
+    border: 3px solid #ffffff;
+    padding: 100px;
+    color: white;
+}
+#messageLabel{
+    margin-left: 17%;
+}
+
+.findChat{
+    margin-left: 9%;
+}
+#sendmessage{
+    margin-left: 17%;
+}
+#findEmailSubmit{
+    margin-left: 0%;
+}
