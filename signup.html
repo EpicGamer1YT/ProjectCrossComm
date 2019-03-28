@@ -3,7 +3,7 @@
 <head>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
     <script>
-        // Initialize Firebase
+    // Initialize Firebase
         var config = {
             apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
             authDomain: "projectcrosscomm.firebaseapp.com",
@@ -13,6 +13,7 @@
             messagingSenderId: "412861101382"
         };
         firebase.initializeApp(config);
+
     </script>
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
@@ -21,8 +22,6 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
 
-
-    <script src="signupJS.js"></script>
     <meta charset="UTF-8">
     <title>Sign Up for Crossroads</title>
     <h1>Sign Up</h1>
@@ -30,7 +29,7 @@
 </head>
 <body>
 <div id="signupDIV" class="signup">
-    <form id="signupFORM" class="signup" method="post" action="signupJS.js">
+    <form id="signupFORM" class="signup" method="get" action="signupJS.js">
         <fieldset>
             <legend>Sign In</legend>
             <p>
@@ -52,14 +51,15 @@
     </form>
 </div>
 <div id="signupGoogle" class="signup">
-    <form id="googleFORM" class="signup">
+    <form id="googleFORM" class="signup" method="get">
         <fieldset>
             <legend>GOOGLE SIGN IN</legend>
             <p>
-                <button id="googleButton" class="signup" type="button" onclick="googleSignIn()">Sign In With Google</button>
+                <button id="googleButton" class="signup" type="button">Sign In With Google</button>
             </p>
         </fieldset>
     </form>
 </div>
 </body>
+<footer><script src="bundledSIGNUP.js"></script></footer>
 </html>

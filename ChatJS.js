@@ -1,3 +1,4 @@
+require("firebase");
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -112,7 +113,7 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
         });
     }
 }
-function fetcher() {
+window.onload = function () {
     var date = new Date();
     var timestamp = date.getTime();
     var localuuid = firebase.auth().currentUser().uid;
@@ -147,8 +148,36 @@ function fetcher() {
             console.log(error.message);
             console.log(error.code);
         });
+    } else {
+        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
+            var newpost = data.val();
+            console.log(newpost);
+            Object.keys(newpost).sort();
+            console.log(newpost);
+            const ordered = Object.keys(newpost).sort();
+            Object.keys(newpost).map((key, index) => {
+                console.log(newpost[key]['message']); //{Prints encrypted message(all messages looped)
+                console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
+                console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
+                console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
+                var decrypt = cryptico.decrypt(newpost[key]['message'], userkey).plaintext;
+
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + newpost[key]['sender'] + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + decrypt + "</span>");
+
+            }).catch( (error) => {
+                console.log(error.message);
+                console.log(error.code);
+            });
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
     }
-}
-window.onload = fetcher();
+};
 
 

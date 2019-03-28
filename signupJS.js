@@ -1,3 +1,5 @@
+
+require("firebase");
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -6,6 +8,9 @@ var config = {
     storageBucket: "projectcrosscomm.appspot.com",
     messagingSenderId: "412861101382"
 };
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 firebase.initializeApp(config);
 var database = firebase.database();
 
@@ -65,7 +70,7 @@ function googleSignIn() {
     firebase.auth().signInWithPopup(provider).then( (result) => {
         var token = result.credential.accessToken; //Google Auth access token
         var user = result.user; //COntains all user infor that Google provided us
-        writeToDatabaseFromGoogleSignIn(user.email, user.displayName, user.uid, user.photoUrl).then( () => {
+        writeToDatabaseFromGoogleSignIn(user.email, user.displayName, user.uid).then( () => {
             console.log("All database writing complete.");
         }).catch( (error) => {
             console.log(error.message);
@@ -77,7 +82,7 @@ function googleSignIn() {
     });
 }
 
-function writeToDatabaseFromGoogleSignIn(email, username, uuid, photoUrl) {
+function writeToDatabaseFromGoogleSignIn(email, username, uuid) {
     database.ref("/users/" + uuid).set({
         "name": username,
         "email": email,
@@ -89,11 +94,10 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid, photoUrl) {
         console.log(error.message);
         console.log(error.code);
     });
-    database.ref("/users/emailConv" + email.replace(".", ",")).set({
+    database.ref("/users/emailConv/" + email.replace(/\./g, ",")).set({
         "name": username,
         "email": email,
         "uid": uuid,
-        "imageUrl": photoUrl,
     }).then( () => {
         console.log("All database writing complete.");
     }).catch( (error) => {
@@ -101,3 +105,4 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid, photoUrl) {
         console.log(error.code);
     });
 }
+
