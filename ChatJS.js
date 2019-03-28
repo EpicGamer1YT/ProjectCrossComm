@@ -131,9 +131,16 @@ function fetcher() {
                 console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
                 console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
                 var decrypt = cryptico.decrypt(newpost[key]['message'], userkey).plaintext;
+                var targetname = "anonymous"; //Needs to be initialized
+                database.ref("/users/" + newpost[key]['sender']).once().then( (snapshot) => {
+                    targetname = snapshot.val().name; //Will overwrite targetname to the actual target name
+                }).catch( (error) => {
+                    console.log(error.message);
+                    console.log(error.code);
+                });
 
                 // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + newpost[key]['sender'] + "</span>");
+                $("#chatField").append("<span>" + targetname + "</span>");
                 // noinspection JSJQueryEfficiency
                 $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
                 // noinspection JSJQueryEfficiency
@@ -149,6 +156,5 @@ function fetcher() {
         });
     }
 }
-window.onload = fetcher();
 
 
