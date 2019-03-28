@@ -7,23 +7,18 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
-require("firebase/app");
-require("firebase/auth");
-require("firebase/database");
 var database = firebase.database();
-var userkey;
 var remoteEmail;
 var target;
 var local;
 var targetUID;
+
 function searchEmails(email) {
     var username;
-    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
+    database.ref("/users/emailConv/" + email).once().then(function(snapshot) {
         //On completion
-        target = snapshot.val();
-        username = (snapshot.val() && snapshot.val().name);
-        remoteEmail  = (snapshot.val() && snapshot.val().email);
-        console.log(snapshot.val());
+       username = (snapshot.val() && snapshot.val().username);
+       remoteEmail  = (snapshot.val() && snapshot.val().email);
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
@@ -68,7 +63,7 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
 function generateKeyPair() {
     var passPhrase = document.getElementById("passInput").value;
     var bits = 1024;
-    userkey = cryptico.generateRSAKey(passPhrase, bits);
+    var userkey = cryptico.generateRSAKey(passPhrase, bits);
     var userPubKey = cryptico.publicKeyString(userkey);
     startChat(firebase.auth().currentUser(), userkey, userPubKey);
 }
@@ -91,64 +86,18 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
     var localEmail = firebase.auth().currentUser().email;
     var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
     if (position) {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
-            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
-            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
-            "sender": localuuid,
-            "time": date.getHours() + "." + date.getMinutes(),
+        database.ref("/chats/" + localuuid + " " + targetUID + "/messages").set({
+            timestamp:  document.getElementById("sendmessage").value,
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/" + timestamp).set({
-            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
-            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
-            "sender": localuuid,
-            "time": date.getHours() + "." + date.getMinutes(),
+        database.ref("/chats/" + targetUID + " " + localuuid + "/messages").set({
+            timestamp:  document.getElementById("sendmessage").value,
         }).catch(function(error) {
             console.log(error.message);
             console.log(error.code);
         });
     }
 }
-function fetcher() {
-    var date = new Date();
-    var timestamp = date.getTime();
-    var localuuid = firebase.auth().currentUser().uid;
-    var localEmail = firebase.auth().currentUser().email;
-    var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
-    if (position) {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
-            var newpost = data.val();
-            console.log(newpost);
-            Object.keys(newpost).sort();
-            console.log(newpost);
-            const ordered = Object.keys(newpost).sort();
-            Object.keys(newpost).map((key, index) => {
-                console.log(newpost[key]['message']); //{Prints encrypted message(all messages looped)
-                console.log(newpost[key]['date']);//Prints date stamp(all messages looped)
-                console.log(newpost[key]['time']);//Prints time stamp(all messages looped)
-                console.log(newpost[key]['sender']);//Prints sender uid(all messages looped)
-                var decrypt = cryptico.decrypt(newpost[key]['message'], userkey).plaintext;
-
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + newpost[key]['sender'] + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + newpost[key]['time'] + "</span>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + decrypt + "</span>");
-
-            }).catch( (error) => {
-                console.log(error.message);
-                console.log(error.code);
-            });
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
-    }
-}
-window.onload = fetcher();
-
-

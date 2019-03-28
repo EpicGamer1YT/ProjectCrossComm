@@ -1,22 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
+legend {
+    color: white;
+}
 body {
     background-color: #000000;
-    font-family: "Open Serif", sans-serif;
+    font-family: "Lato", sans-serif;
     padding: 0 14px 5px 0px;
     font-size: 20px;
     margin: 0;
     color: #ffffff;
 }
+h1 {
+    font-size: 40px;
+    text-align: left;
+}
 #title {
-    background-color: #ffffff;
+    background-color: black;
     font-family: "Arial", sans-serif;
-    padding: 15px 5px 0 718px;
+    padding: 15px 5px 0px 0px;
     font-size: 20px;
-    color: white;
+    color: black;
     margin: 0px;
-
 }
 #type {
     display: block;
@@ -26,13 +32,14 @@ body {
 }
 h3{
     color: white;
+    padding: 15px;
 }
 
 .center {
     margin: auto;
     width: 64.7%;
     border: 0px solid #ffffff;
-    padding: 50px;
+    padding: 0px;
     color: white;
 }
 .center2 {
@@ -43,7 +50,14 @@ h3{
     color: white;
 }
 form {
+    background-color: white;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
     display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
     color: white;
 }
 
@@ -60,11 +74,9 @@ ul {
     overflow: hidden;
     background-color: #333;
 }
-
 li {
     float: left;
 }
-
 li a {
     display: block;
     color: white;
@@ -72,7 +84,6 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
-
 li a:hover {
     background-color: #111;
 }
