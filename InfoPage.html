@@ -1,78 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
-                authDomain: "projectcrosscomm.firebaseapp.com",
-                databaseURL: "https://projectcrosscomm.firebaseio.com",
-                projectId: "projectcrosscomm",
-                storageBucket: "projectcrosscomm.appspot.com",
-                messagingSenderId: "412861101382"
-            };
-            firebase.initializeApp(config);
-        </script>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="infopagestyle.css">
-        <title>Information</title>
-    </head>
-    <ul>
-        <li><a class="active" href="index.html">Home</a></li>
-        <li><a href="InfoPage.html">Information</a></li>
-        <li><a href="ChatLayout.html">Chat</a></li>
-        <li><a href="ChatLayoutGC.html"> Group Chat</a></li>
-        <li><a href="https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661">Privacy Policy</a></li>
-        <li><a>Sign In</a></li>
-        <li><a href="signup.html">Sign Up</a></li>
-        <li><a href="https://accounts.google.com/signin/oauth/oauthchooseaccount?hl=en&client_id=412861101382-82aanbovm04f03v5213a1r2gcr2tr4cp.apps.googleusercontent.com&as=T7XsLmmpTa2e0shphFJ4Fg&destination=https%3A%2F%2Fprojectcrosscomm.firebaseapp.com&approval_state=!ChRoemoxTDliWFZ2b2k0NmFYQWY5VRIfazV2SnVwZWw2R2NTc0NEZU1wUEotOWJwTmVEQ2x4WQ%E2%88%99AJDr988AAAAAXIuauDVwBq5zKCvXY9N-bNGaW2p6gFb-&oauthgdpr=1&oauthriskyscope=1&xsrfsig=ChkAeAh8TwAD2H1fgKlA8ZwzCbeTQPZrcm-xEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow">Google</a></li>
-        <li></li>
-        <li>
-    </ul>
-    <body>
-        <h1 id="title"><strong>Information</strong></h1>
-        <h2 id="subtitle">This website was a group project in our school and was entirely developed by 6 individuals.</h2>
-        <table id="members" class = "center">
-            <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Email</th>
-            </tr>
-            <tr>
-                <th>Agranya Ketha</th>
-                <th>HTML Frontend/JavaScript Backend</th>
-                <th><a href="mailto:agranya.ketha@mcvts.org">agranya.ketha@mcvts.org</a></th>
-            </tr>
-            <tr>
-                <th>Ben Osias</th>
-                <th>HTML Frontend</th>
-                <th><a href="mailto:ben.osias@mcvts.org">ben.osias@mcvts.org</a></th>
-            </tr>
-            <tr>
-                <th>Connor McDermid</th>
-                <th>JavaScript Fullstack</th>
-                <th><a href="mailto:connor.mcdermid@mcvts.org">connor.mcdermid@mcvts.org</a></th>
-            </tr>
-            <tr>
-                <th>Elijah Uribe</th>
-                <th>HTML Frontend</th>
-                <th><a href="mailto:elijah.uribe@mcvts.org">elijah.uribe@mcvts.org</a></th>
-            </tr>
-            <tr>
-                <th>Frank Gomes</th>
-                <th>TypeScript Backend</th>
-                <th><a href="mailto:frank.gomes@mcvts.org">frank.gomes@mcvts.org</a></th>
-            </tr>
-            <tr>
-                <th>Tejas Metha</th>
-                <th>App Development/JavaScript Backend</th>
-                <th><a href="mailto:tejas.metha@mcvts.org">tejas.metha@mcvts.org</a></th>
-            </tr>
-        </table>
-    </body>                                                     <!--This will automatically open email client -->
-    <p></p>
-    <footer>
-        <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
-        <script src="infopagemain.js"></script>
-    </footer>
+<head>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
+            authDomain: "projectcrosscomm.firebaseapp.com",
+            databaseURL: "https://projectcrosscomm.firebaseio.com",
+            projectId: "projectcrosscomm",
+            storageBucket: "projectcrosscomm.appspot.com",
+            messagingSenderId: "412861101382"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="infopagestyle.css">
+    <title>Information</title>
+</head>
+<ul>
+    <li><a class="active" href="index.html">Home</a></li>
+    <li><a href="InfoPage.html">Information</a></li>
+    <li><a href="ChatLayout.html">Chat</a></li>
+
+    <li><a onclick = "window.open('https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661', '_blank')" cursor = pointer>Privacy Policy</a></li>
+    <li><a href = "signin.html">Sign In</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li></li>
+    <li>
+</ul>
+<body>
+<h1 id="title"><strong>Information</strong></h1>
+<h2 id="subtitle">This website was a group project in our school and was entirely developed by 6 individuals.</h2>
+<table id="members" class = "center">
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email</th>
+    </tr>
+    <tr>
+        <th>Agranya Ketha</th>
+        <th>HTML Frontend/JavaScript Backend</th>
+        <th><a href="mailto:agranya.ketha@mcvts.org">agranya.ketha@mcvts.org</a></th>
+    </tr>
+    <tr>
+        <th>Ben Osias</th>
+        <th>HTML Frontend</th>
+        <th><a href="mailto:ben.osias@mcvts.org">ben.osias@mcvts.org</a></th>
+    </tr>
+    <tr>
+        <th>Connor McDermid</th>
+        <th>JavaScript Fullstack</th>
+        <th><a href="mailto:connor.mcdermid@mcvts.org">connor.mcdermid@mcvts.org</a></th>
+    </tr>
+    <tr>
+        <th>Elijah Uribe</th>
+        <th>HTML Frontend</th>
+        <th><a href="mailto:elijah.uribe@mcvts.org">elijah.uribe@mcvts.org</a></th>
+    </tr>
+    <tr>
+        <th>Frank Gomes</th>
+        <th>TypeScript Backend</th>
+        <th><a href="mailto:frank.gomes@mcvts.org">frank.gomes@mcvts.org</a></th>
+    </tr>
+    <tr>
+        <th>Tejas Metha</th>
+        <th>App Development/JavaScript Backend</th>
+        <th><a href="mailto:tejas.metha@mcvts.org">tejas.metha@mcvts.org</a></th>
+    </tr>
+</table>
+</body>                                                     <!--This will automatically open email client -->
+<p></p>
+<footer>
+    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+    <script src="infopagemain.js"></script>
+</footer>
 </html>

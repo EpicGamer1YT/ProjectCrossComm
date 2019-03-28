@@ -23,26 +23,36 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
 
     <meta charset="UTF-8">
-    <title>Sign Up for Crossroads</title>
-    <h1>Sign Up</h1>
+    <title>Sign Up</title>
     <link href="signupCSS.css" rel="stylesheet">
 </head>
 <body>
+<ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="InfoPage.html">Information</a></li>
+    <li><a href="ChatLayout.html">Chat</a></li>
+    <li><a href="ChatLayoutGC.html"> Group Chat</a></li>
+    <li><a onclick = "window.open('https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661', '_blank')" cursor = pointer>Privacy Policy</a></li>
+    <li><a href = "signin.html">Sign In</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li></li>
+    <li>
+</ul>
 <div id="signupDIV" class="signup">
     <form id="signupFORM" class="signup" method="get" action="signupJS.js">
         <fieldset>
-            <legend>Sign In</legend>
+            <legend>Sign Up</legend>
             <p>
                 <label for="signupNAME" id="signupNAMELABEL" class="signup">Username:</label>
-                <input id="signupNAME" class="signup" type="text">
+                <input id="signupNAME" class="signup" type="text" placeholder="Username">
             </p>
             <p>
                 <label for="signupEMAIL" id="signupEMAILLABEL" class="signup">Email:</label>
-                <input id="signupEMAIL" class="signup" type="email">
+                <input id="signupEMAIL" class="signup" type="email" placeholder="Email">
             </p>
             <p>
                 <label for="signupPASS" id="signupPASSLABEL" class="signup">Password:</label>
-                <input id="signupPASS" class="signup" type="password">
+                <input id="signupPASS" class="signup" type="password" placeholder="Password">
             </p>
             <p>
                 <button type="submit" id="signupSUBMIT" class="signup" onclick="signUpWithEmail()">SUBMIT</button>

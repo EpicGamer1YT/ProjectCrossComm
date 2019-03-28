@@ -8,10 +8,11 @@ var config = {
     storageBucket: "projectcrosscomm.appspot.com",
     messagingSenderId: "412861101382"
 };
+
+firebase.initializeApp(config);
 require("firebase/app");
 require("firebase/auth");
 require("firebase/database");
-firebase.initializeApp(config);
 var database = firebase.database();
 
 
