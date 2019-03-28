@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Groupchat</title>
+    <title>Group Chat</title>
     <style>
+        body {
+            background-color: #000000;
+            font-family: "Lato", sans-serif;
+            padding: 0 14px 5px 0px;
+            font-size: 20px;
+            margin: 0;
+            color: #ffffff;
+        }
         .center {
             margin: auto;
             width: 64.7%;
@@ -19,7 +27,14 @@
             color: white;
         }
         form {
+            background-color: white;
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
             display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
             color: white;
         }
         ul {
@@ -29,32 +44,34 @@
             overflow: hidden;
             background-color: #333;
         }
-
         li {
             float: left;
         }
-
         li a {
             display: block;
             color: white;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
+            font-size: 20px;
+            font-family: Lato, serif;
         }
-
         li a:hover {
             background-color: #111;
         }
     </style>
-
 </head>
 <body style = "background-color: black;">
 <ul>
-    <li><a class="active" href="index.html">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="InfoPage.html">Information</a></li>
     <li><a href="ChatLayout.html">Chat</a></li>
-    <li><a href="ChatLayoutGC.html">Groupchat</a></li>
-    <li><a href="https://accounts.google.com/signin/oauth/oauthchooseaccount?hl=en&client_id=412861101382-82aanbovm04f03v5213a1r2gcr2tr4cp.apps.googleusercontent.com&as=T7XsLmmpTa2e0shphFJ4Fg&destination=https%3A%2F%2Fprojectcrosscomm.firebaseapp.com&approval_state=!ChRoemoxTDliWFZ2b2k0NmFYQWY5VRIfazV2SnVwZWw2R2NTc0NEZU1wUEotOWJwTmVEQ2x4WQ%E2%88%99AJDr988AAAAAXIuauDVwBq5zKCvXY9N-bNGaW2p6gFb-&oauthgdpr=1&oauthriskyscope=1&xsrfsig=ChkAeAh8TwAD2H1fgKlA8ZwzCbeTQPZrcm-xEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow">Sign Up</a></li>
+    <li><a href="ChatLayoutGC.html"> Group Chat</a></li>
+    <li><a onclick = "window.open('https://app.termly.io/document/privacy-policy/0ae020d8-ee05-4202-a0c7-d4ff19e8f661', '_blank')" cursor = pointer>Privacy Policy</a></li>
+    <li><a href = "signin.html">Sign In</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li></li>
+    <li>
 </ul>
 <h1 style = "color: white;" id= "title">Welcome To Your Private Groupchat Room!</h1>
 <h3 style = "color: white;">Invite your friends to start chatting</h3>
@@ -64,9 +81,8 @@
     <h1></h1>
     <form action="">
         <input type="text" name="Type" placeholder="Type Here"><br>
-        <input type="submit" value="Send">
     </form>
-
+    <input type="submit" value="Send">
 </div>
 </body>
 </html>
