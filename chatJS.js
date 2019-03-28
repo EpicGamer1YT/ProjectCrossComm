@@ -17,8 +17,8 @@ function searchEmails(email) {
     var username;
     database.ref("/users/emailConv/" + email).once().then(function(snapshot) {
         //On completion
-        username = (snapshot.val() && snapshot.val().username);
-        remoteEmail  = (snapshot.val() && snapshot.val().email);
+       username = (snapshot.val() && snapshot.val().username);
+       remoteEmail  = (snapshot.val() && snapshot.val().email);
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);

@@ -7,6 +7,9 @@ var config = {
     messagingSenderId: "412861101382"
 };
 firebase.initializeApp(config);
+require("firebase/app");
+require("firebase/auth");
+require("firebase/database");
 var database = firebase.database();
 function showAccCreate() { //Hides and shows account create button
     var x = document.getElementById("hiddenaccountcreation");
@@ -232,6 +235,17 @@ function signInUser() { //Uses email sign-in so signin to existing account
     });
 }*/
 
-function searchForEmail() {
+function google() { //DEPRECATED
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
+    firebase.auth().languageCode = 'en';
+
+    firebase.auth().signInWithPopup(provider).then ( (result) => {
+        var token = result.credential.accessToken;
+        var user = result.user;
+    }).catch( (error) => {
+        console.log(error.code);
+        console.log(error.message);
+    });
 }

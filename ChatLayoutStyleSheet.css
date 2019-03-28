@@ -60,6 +60,13 @@ form {
     box-sizing: border-box;
     color: white;
 }
+
+
+label#messageLabel {
+    background-color: black;
+    color: white;
+}
+
 ul {
     list-style-type: none;
     margin: 0%;
@@ -79,8 +86,4 @@ li a {
 }
 li a:hover {
     background-color: #111;
-}
-label#messageLabel {
-    background-color: black;
-    color: white;
 }
