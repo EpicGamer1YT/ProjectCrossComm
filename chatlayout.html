@@ -6,39 +6,38 @@
     <title>ChatLayout</title>
     <script src="cryptico/cryptico-js-master/lib/cryptico.js"></script>
 </head>
-<body style = "background-color: black;">
-<ul>
-    <li><a class="active" href="index.html">Home</a></li>
-    <li><a href="InfoPage.html">Information</a></li>
-    <li><a href="ChatLayout.html">Chat</a></li>
-    <li><a href="ChatLayoutGC.html">Groupchat</a></li>
-    <li><a href="https://accounts.google.com/signin/oauth/oauthchooseaccount?hl=en&client_id=412861101382-82aanbovm04f03v5213a1r2gcr2tr4cp.apps.googleusercontent.com&as=T7XsLmmpTa2e0shphFJ4Fg&destination=https%3A%2F%2Fprojectcrosscomm.firebaseapp.com&approval_state=!ChRoemoxTDliWFZ2b2k0NmFYQWY5VRIfazV2SnVwZWw2R2NTc0NEZU1wUEotOWJwTmVEQ2x4WQ%E2%88%99AJDr988AAAAAXIuauDVwBq5zKCvXY9N-bNGaW2p6gFb-&oauthgdpr=1&oauthriskyscope=1&xsrfsig=ChkAeAh8TwAD2H1fgKlA8ZwzCbeTQPZrcm-xEg5hcHByb3ZhbF9zdGF0ZRILZGVzdGluYXRpb24SBXNvYWN1Eg9vYXV0aHJpc2t5c2NvcGU&flowName=GeneralOAuthFlow">Sign Up</a></li>
-</ul>
+<body>
+    <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="InfoPage.html">Information</a></li>
+        <li><a href="chatlayout.html">Chat</a></li>
+        <li><a href="ChatLayoutGC.html">Groupchat</a></li>
+    </ul>
+    
+    <h1 style = "color: white;" id= "title">Welcome To Your Private Chat Room!</h1>
+    <h3 style = "color: white;">Invite your friends to start chatting</h3>
+    <div class = center2>Display Text Here</div>
 
-<h1 style = "color: white;" id= "title">Welcome To Your Private Chat Room!</h1>
-<h3 style = "color: white;">Invite your friends to start chatting</h3>
-<div class = center2>Display Text Here</div>
-
-<div class= center>
-    <form action="chatJS.js" method="post" id="chatInput">
-        <label for="sendmessage" id="messageLabel">Send Message</label>
-        <input id="sendmessage" type="text" name="Type" placeholder="Type Here"><br>
-        <input type="submit" value="Send">
-    </form>
-</div>
-<div id="newchat">
-    <form action="chatJS.js" method="post" id="findNewChat" class="findChat">
-        <label for="findEmail" class="findChat">Search Emails</label>
-        <input id="findEmail" type="email" class="findChat">
-        <input id="findEmailSubmit" class="findChat" onclick="splitter()" type="submit">
-    </form>
-    <div id="hiddenPass" class="encrypt">
-        <form action="chatJS.js" method="post" id="encryptForm" class="encrypt">
-            <label for="passInput" id="passLabel" class="encrypt">Encryption Passphrase</label>
-            <input id="passInput" class="encrypt" type="password" placeholder="Encryption Key">
-            <button id="submit" value="" class="encrypt" onclick="generateKeyPair()">SUBMIT</button>
+    <div class= center>
+        <form action="chatJS.js" method="post" id="chatInput">
+            <label for="sendmessage" id="messageLabel">Send Message</label>
+            <input id="sendmessage" type="text" name="Type" placeholder="Type Here"><br>
+            <input type="submit" value="Send">
         </form>
     </div>
-</div>
+    <div id="newchat">
+        <form action="chatJS.js" method="post" id="findNewChat" class="findChat">
+            <label for="findEmail" class="findChat">Search Emails</label>
+            <input id="findEmail" type="email" class="findChat">
+            <input id="findEmailSubmit" class="findChat" onclick="splitter()" type="submit">
+        </form>
+        <div id="hiddenPass" class="encrypt">
+            <form action="chatJS.js" method="post" id="encryptForm" class="encrypt">
+                <label for="passInput" id="passLabel" class="encrypt">Encryption Passphrase</label>
+                <input id="passInput" class="encrypt" type="password" placeholder="Encryption Key">
+                <button id="submit" value="" class="encrypt" onclick="generateKeyPair()">SUBMIT</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
