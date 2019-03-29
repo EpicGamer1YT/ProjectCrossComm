@@ -41,7 +41,7 @@ function searchEmails(email) {
 }
 function parseSearchedEmails() {
     var email = document.getElementById("findEmail").value;
-    var modifiedEmail = email.replace(".", ",");
+    var modifiedEmail = email.replace(/\./g, ",");
     returnEmail = searchEmails(modifiedEmail);
     if (returnEmail.equals("No emails found")) {
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
