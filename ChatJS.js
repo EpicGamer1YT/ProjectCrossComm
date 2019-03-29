@@ -41,7 +41,7 @@ function searchEmails(email) {
 }
 function parseSearchedEmails() {
     var email = document.getElementById("findEmail").value;
-    var modifiedEmail = email.replace(".", ",");
+    var modifiedEmail = email.replace(/\./g, ",");
     returnEmail = searchEmails(modifiedEmail);
     if (returnEmail.equals("No emails found")) {
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
@@ -55,7 +55,7 @@ function parseSearchedEmails() {
         $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickablt to start chat
         // noinspection JSJQueryEfficiency
         $("#listHere").attr("onclick", "parseSearchedEmails()"); //Should set the onclick to run all necessary chat functions
-        
+
         generateKeyPair(); //Passes function off to get keypair generated.
     }
 
