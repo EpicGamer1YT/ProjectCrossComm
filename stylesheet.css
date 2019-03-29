@@ -17,7 +17,6 @@
 h1.yeet {
     color: white;
     font-size: 50px;
-    text-align: center;
 }
 span.teey {
     color: #cb0000;
@@ -37,6 +36,14 @@ body {
     margin: 0;
     color: #404040;
 }
+
+th{
+    color: white;
+    background-color: black;
+}
+li {
+    color: white;
+}
 h1 {
     text-align: center;
     font-family: "Courier", serif;
@@ -44,6 +51,7 @@ h1 {
     font-size: 32px;
     font-weight: 500;
     margin-top: 10px;
+
 }
 h2{
     font-family: "Lato", sans-serif;
@@ -52,7 +60,7 @@ h2{
     margin: 0px;
     color: white;
     font-stretch:ultra-condensed;
-    text-align: center;
+    margin-left: 37%;
 }
 img{
     padding: 14px 5px 0 718px;
@@ -86,27 +94,42 @@ h4{
 #link {
     color: white;
 }
+
+
+
+
+
+
 h12{
     background-color:#000000;
 
 }
+
 img{
     padding: 0% 0% 0% 0%;
     height: 15%;
     width: 15%;
     margin-left: 40%;
+
 }
 p1 {
     padding: 5px 5px 5px 10px;
+
+
 }
 p2{
     padding: 1000px 80px 80px 500px;
+
+
 }
 h4{
     margin-top: 50px;
     margin-left: 800px;
     margin-right: 1035px;
+
+
 }
+
 .signup {
     color: white;
     background-color: DodgerBlue;
@@ -123,6 +146,13 @@ h4{
 html {
     alignment: center;
 }
+a{
+    padding: 0px 0px 0px 0px;
+    color: #f9fffb;
+    margin-left: 15%;
+
+
+}
 ul {
     list-style-type: none;
     margin: 0%;
@@ -130,10 +160,11 @@ ul {
     overflow: hidden;
     background-color: #333;
 }
+
 li {
     float: left;
-    color: white;
 }
+
 li a {
     display: block;
     color: white;
@@ -141,9 +172,11 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
 li a:hover {
     background-color: #111;
 }
+
 p82{
     margin-left:3%;
     color: white;
@@ -152,6 +185,7 @@ p82{
     position: relative;
     display: inline-block;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -161,6 +195,7 @@ p82{
     padding: 12px 16px;
     z-index: 1;
 }
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -168,6 +203,7 @@ span{
     color: white;
     margin-top: 20%;
 }
+
 a13{
     color: black;
 }
