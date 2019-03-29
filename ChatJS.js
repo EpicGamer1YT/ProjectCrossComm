@@ -20,6 +20,7 @@ var target;
 var local;
 var localuuid = firebase.auth().currentUser().uid;
 var targetUID;
+var returnEmail;
 function searchEmails(email) {
     var username;
     database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
@@ -41,7 +42,7 @@ function searchEmails(email) {
 function parseSearchedEmails() {
     var email = document.getElementById("findEmail").value;
     var modifiedEmail = email.replace(".", ",");
-    var returnEmail = searchEmails(modifiedEmail);
+    returnEmail = searchEmails(modifiedEmail);
     if (returnEmail.equals("No emails found")) {
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
 
@@ -49,13 +50,19 @@ function parseSearchedEmails() {
         // noinspection JSJQueryEfficiency
         $("#listHere").append("Users found:"); //Adds to value of node
         // noinspection JSJQueryEfficiency
-        $("#listHere").append(returnEmail);
+        $("#listHere").append(returnEmail); //Adds to value of node
+        // noinspection JSJQueryEfficiency
+        $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickablt to start chat
+        // noinspection JSJQueryEfficiency
+        $("#listHere").attr("onclick", "parseSearchedEmails()"); //Should set the onclick to run all necessary chat functions
+        
+        generateKeyPair(); //Passes function off to get keypair generated.
     }
 
 }
 
 function startChat(user, userkey, userPubKey) { //Will start an encrypted chat between two users FIXME: Needs rewriting
-    target = database.ref("/users/emailConv/" + remoteEmail).once();
+    target = database.ref("/users/emailConv/" + returnEmail).once();
     targetUID = target.uid;
     var localUID = firebase.auth().currentUser().uid;
 
@@ -69,8 +76,9 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
 
 /**
  * uses Cryptico.js to generate a public/private keypair
+ * if the user already has a keypair, it passes that one off to the chat.
  */
-function generateKeyPair() { //TODO: Finish writing this and startChat()
+function generateKeyPair() {
     var position = database.ref("/users/emailConv/" + local.email.replace(/\./g, "") + "/chats/" + targetUID).once();
     if (position) {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once().then( (snapshot) => {
