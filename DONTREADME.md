@@ -1,3 +1,8 @@
+---
+title: GH-Pages needs this metadata  
+layout: post
+---
+
 # Project Cross Comm
 ## AKA: Quetzal
 ##### Contributors:
