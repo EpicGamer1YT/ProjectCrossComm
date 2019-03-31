@@ -1,8 +1,13 @@
-require("firebase");
+/*
+I just want to start this file off with a disclaimer.
+Javascript is a monstrosity to write, and most of this hurt me to read and write.
+Please bear this in mind as you continue.
+ */
+require("firebase"); //Node functions with Browserify to bundle required modules
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
-    databaseURL: "https://projectcrosscomm.firebaseio.com",
+    databaseURL: "https://projectcrosscomm.firebaseio.com", //No touchie
     projectId: "projectcrosscomm",
     storageBucket: "projectcrosscomm.appspot.com",
     messagingSenderId: "412861101382"
@@ -12,7 +17,7 @@ require("firebase/app");
 require("firebase/auth");
 require("firebase/database");
 require("cryptico");
-const cryptico = require("cryptico");
+const cryptico = require("cryptico"); //Node with browserify for RSA
 var database = firebase.database();
 var userkey;
 var remoteEmail;
@@ -21,7 +26,7 @@ var local;
 var localuuid = firebase.auth().currentUser().uid;
 var targetUID;
 var returnEmail;
-function searchEmails(email) {
+function searchEmails(email) { //Function searches database for requested email
     var username;
     database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
         //On completion
@@ -29,7 +34,7 @@ function searchEmails(email) {
         username = (snapshot.val() && snapshot.val().name);
         remoteEmail  = (snapshot.val() && snapshot.val().email);
         console.log(snapshot.val());
-    }).catch(function(error) {
+    }).catch((error)  => {
         console.log(error.message);
         console.log(error.code);
     });
@@ -39,7 +44,7 @@ function searchEmails(email) {
         return "No emails found";
     }
 }
-function parseSearchedEmails() {
+function parseSearchedEmails() { //Function calls searchEmails and parses value; allows user to start chat
     var email = document.getElementById("findEmail").value;
     var modifiedEmail = email.replace(/\./g, ",");
     returnEmail = searchEmails(modifiedEmail);
@@ -52,9 +57,9 @@ function parseSearchedEmails() {
         // noinspection JSJQueryEfficiency
         $("#listHere").append(returnEmail); //Adds to value of node
         // noinspection JSJQueryEfficiency
-        $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickablt to start chat
+        $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickable to start chat
         // noinspection JSJQueryEfficiency
-        $("#listHere").attr("onclick", "parseSearchedEmails()"); //Should set the onclick to run all necessary chat functions
+        $("#listHere").attr("onclick", "generateKeyPair()"); //Should set the onclick to run all necessary chat functions
 
         generateKeyPair(); //Passes function off to get keypair generated.
     }
@@ -65,9 +70,23 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
     target = database.ref("/users/emailConv/" + returnEmail).once();
     targetUID = target.uid;
     var localUID = firebase.auth().currentUser().uid;
-
+    var position = database.ref()
+    var accepted = database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + targetUID + "/").once();
+    if (accepted.equals("true")) {
+        //continue as normal
+    } else {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + targetUID + "/").set({
+            "accepted": "false",
+        }).then( () => {
+            console.log("Other user has not yet accepted the chat. Set their flag to \"false\".");
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
+    }
     database.ref("/chats/" + localUID + " " + targetUID + "/" + localUID + "/pubkey").set({
-        "pubkey": userPubKey.toString(),
+        "pubkey": userPubKey.toString(), //Pushes public key string to database.
+        "privkey": userkey.toString(),
     }).catch(function(error) {
         console.log(error.message);
         console.log(error.code);
@@ -80,7 +99,16 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
  */
 function generateKeyPair() {
     var position = database.ref("/users/emailConv/" + local.email.replace(/\./g, "") + "/chats/" + targetUID).once();
-    if (position) {
+    if (position.equals("true")) {
+
+        database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + localuuid + "/").set({
+            "accepted": "true",
+        }).then( () => {
+            console.log("Set accepted flag for local client to \"true\".");
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once().then( (snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.

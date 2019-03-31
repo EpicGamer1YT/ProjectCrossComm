@@ -81,7 +81,8 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
  */
 function generateKeyPair() {
     var position = database.ref("/users/emailConv/" + local.email.replace(/\./g, "") + "/chats/" + targetUID).once();
-    if (position) {
+    if (position.equals("true")) {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + targetUID + "/").once().then()
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once().then( (snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
@@ -132,7 +133,7 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
     var timestamp = date.getTime();
     var localEmail = firebase.auth().currentUser().email;
     var position = database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once();
-    if (position) {
+    if (position.equals("true")) {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
             "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
             "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
@@ -160,7 +161,7 @@ window.onload = function () {
     var localuuid = firebase.auth().currentUser().uid;
     var localEmail = firebase.auth().currentUser().email;
     var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
-    if (position) {
+    if (position.equals("true")) {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
