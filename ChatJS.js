@@ -52,7 +52,7 @@ function parseSearchedEmails() {
         // noinspection JSJQueryEfficiency
         $("#listHere").append(returnEmail); //Adds to value of node
         // noinspection JSJQueryEfficiency
-        $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickablt to start chat
+        $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickable to start chat
         // noinspection JSJQueryEfficiency
         $("#listHere").attr("onclick", "parseSearchedEmails()"); //Should set the onclick to run all necessary chat functions
 

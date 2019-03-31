@@ -21,14 +21,14 @@
     <div class = center2>Display Text Here</div>
 
     <div class= center>
-        <form action="chatJS.js" method="post" id="chatInput">
+        <form id="chatInput">
             <label for="sendmessage" id="messageLabel">Send Message</label>
             <input id="sendmessage" type="text" name="Type" placeholder="Type Here"><br>
-            <input type="submit" value="Send">
+            <input type="submit" value="Send" onclick="sendMessage()">
         </form>
     </div>
     <div id="newchat">
-        <form action="chatJS.js" method="post" id="findNewChat" class="findChat">
+        <form id="findNewChat" class="findChat">
             <label for="findEmail" class="findChat">Search Emails</label>
             <input id="findEmail" type="email" class="findChat">
             <input id="findEmailSubmit" class="findChat" onclick="parseSearchedEmails()" type="submit">
