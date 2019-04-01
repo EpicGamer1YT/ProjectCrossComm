@@ -1,3 +1,4 @@
+
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (global){
 'use strict';
@@ -48795,19 +48796,20 @@ require("firebase/app");
 require("firebase/auth");
 require("firebase/database");
 function signIN() {
-    var email = document.getElementById("signinEMAIL");
-    var pass = document.getElementById("signinPASS");
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch( (error) => {
+    var email = document.getElementById("signinEMAIL").value;
+    var pass = document.getElementById("signinPASS").value;
+    console.log("hello");
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(function() {
+        window.location.pathname = '/ProjectCrossComm/chatlayout.html'
+    }).catch((error) => {
         console.log(error.message);
         console.log(error.code);
     });
 }
 function googleSignIn() {
     var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
     firebase.auth().languageCode = 'en';
-    firebase.auth().signInWithPopup(provider).then( (result) => {
-        var token = result.credential.accessToken; //Google Auth access token
+    firebase.auth().signInWithPopup(provider).then(function(result) {
         var user = result.user; //Contains all user info that Google provided us
         writeToDatabaseFromGoogleSignIn(user.email, user.displayName, user.uid).then( () => {
             console.log("All database writing complete.");
@@ -48815,11 +48817,13 @@ function googleSignIn() {
             console.log(error.message);
             console.log(error.code);
         });
+        window.location.pathname = '/ProjectCrossComm/chatlayout.html'
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
     });
 }
+
 
 function writeToDatabaseFromGoogleSignIn(email, username, uuid) {
     database.ref("/users/" + uuid).set({
@@ -48842,6 +48846,7 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid) {
         console.log(error.message);
         console.log(error.code);
     });
+    window.location.pathname = '/ProjectCrossComm/chatlayout.html'
 }
 
 
@@ -48858,6 +48863,8 @@ var process = module.exports = {};
 
 var cachedSetTimeout;
 var cachedClearTimeout;
+
+
 
 function defaultSetTimout() {
     throw new Error('setTimeout has not been defined');
@@ -48910,6 +48917,7 @@ function runTimeout(fun) {
 
 
 }
+
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
         //normal enviroments in sane situations
@@ -49113,3 +49121,4 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
 },{"process/browser.js":104,"timers":105}]},{},[103]);
+

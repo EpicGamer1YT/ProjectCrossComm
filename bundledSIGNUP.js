@@ -48802,17 +48802,11 @@ function signUpWithEmail() {
     const username = document.getElementById("signupNAME").value;
     const email = document.getElementById("signupEMAIL").value;
     const pass = document.getElementById("signupPASS").value;
-    console.log(email + " " + pass + " " + username);
-    firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then((result) => {
         var user = firebase.auth().currentUser;
         var uidvalue = user.uid;
-        console.log(uidvalue)
-        writeUserDataFromEmailSignIn(email, username, uidvalue).then( () => {
-            console.log("All pushes completed.")
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
+        console.log(uidvalue);
+        writeUserDataFromEmailSignIn(email, username, uidvalue);
     }).catch((error) => {
         alert(error.message);
         console.log(error.message);
@@ -48820,6 +48814,9 @@ function signUpWithEmail() {
     });
 
 }
+document.getElementById("signupSUBMIT").addEventListener("click", function() {
+    signUpWithEmail();
+});
 
 function writeUserDataFromEmailSignIn(email, username, uuid) {
     database.ref('/users/' + uuid).set({
@@ -48827,18 +48824,19 @@ function writeUserDataFromEmailSignIn(email, username, uuid) {
         "email": email,
         "uid": uuid,
     }).then( () => {
-        console.log("Database push complete.")
+        console.log("Database push complete.");
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
     });
 
-    database.ref('/users/emailConv' + email.replace(".", ",")).set({
+    database.ref("/users/emailConv/" + email.replace(/\./g, ",")).set({ //use regex to replace all periods to validate branch name
         "name": username,
         "email": email,
         "uid": uuid,
     }).then( () => {
         console.log("emailConv push complete.");
+        window.location.pathname = '/ProjectCrossComm/chatlayout.html';
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
