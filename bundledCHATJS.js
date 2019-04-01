@@ -4,7 +4,7 @@ I just want to start this file off with a disclaimer.
 Javascript is a monstrosity to write, and most of this hurt me to read and write.
 Please bear this in mind as you continue.
  */
-require("firebase"); //Node functions with Browserify to bundle required modules
+const firebase = require("firebase"); //Node functions with Browserify to bundle required modules
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
