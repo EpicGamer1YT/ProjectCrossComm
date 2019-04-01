@@ -48836,7 +48836,7 @@ function writeUserDataFromEmailSignIn(email, username, uuid) {
         "uid": uuid,
     }).then( () => {
         console.log("emailConv push complete.");
-        window.location.pathname = 'ProjectCrossComm/chatlayout.html';
+        window.location.pathname = 'ChatLayout.html';
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
