@@ -4,7 +4,7 @@ I just want to start this file off with a disclaimer.
 Javascript is a monstrosity to write, and most of this hurt me to read and write.
 Please bear this in mind as you continue.
  */
-require("firebase"); //Node functions with Browserify to bundle required modules
+var firebase = require("firebase"); //Node functions with Browserify to bundle required modules
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -24,9 +24,19 @@ var userkey;
 var remoteEmail;
 var target;
 var local;
-var localuuid = firebase.auth().currentUser().uid;
+var localuuid;
 var targetUID;
 var returnEmail;
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        localuuid = user.uid;
+    } else {
+        alert("Please sign in!");
+        window.location.pathname = 'signin.html'
+
+// No user is signed in.
+    }
+});
 function searchEmails(email) { //Function searches database for requested email
     var username;
     database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
@@ -189,11 +199,26 @@ window.onload = function () {
 
     var date = new Date();
     var timestamp = date.getTime();
-    var localuuid = firebase.auth().currentUser().uid;
-    var localEmail = firebase.auth().currentUser().email;
-    var position = database.ref("/users/emailConv/" + localEmail + "/chats").once(targetUID);
+    var localuuid;
+    var localEmail;
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            localuuid = user.uid;
+            localEmail = user.email;
+            console.log(localuuid);
+        } else {
+            alert("Please sign in!");
+            window.location.pathname = 'signin.html'
+        }
+    });
+    var position;
+    database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value', function(snapshot){
+        if (snapshot != null) {
+            position = snapshot.val();
+        }
+    });
     if (position) {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
             Object.keys(newpost).sort();
@@ -222,7 +247,7 @@ window.onload = function () {
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_updated", (data, prevChildKey) => {
+        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
             Object.keys(newpost).sort();
@@ -246,9 +271,6 @@ window.onload = function () {
                 console.log(error.message);
                 console.log(error.code);
             });
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
         });
     }
 };

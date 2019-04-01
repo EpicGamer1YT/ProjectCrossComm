@@ -48800,7 +48800,7 @@ function signIN() {
     var pass = document.getElementById("signinPASS").value;
     console.log("hello");
     firebase.auth().signInWithEmailAndPassword(email, pass).then(function() {
-        window.location.pathname = 'ChatLayout.html'
+        alert(error.message);
     }).catch((error) => {
         console.log(error.message);
         console.log(error.code);
