@@ -88,3 +88,6 @@ fabric.properties
 *.md
 # Except for our README
 !DONTREADME!.md
+
+# Ignore the node modules
+node_modules
