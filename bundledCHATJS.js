@@ -182,7 +182,11 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
         });
     }
 }
+
+
+
 window.onload = function () {
+
     var date = new Date();
     var timestamp = date.getTime();
     var localuuid = firebase.auth().currentUser().uid;
