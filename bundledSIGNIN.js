@@ -48800,7 +48800,7 @@ function signIN() {
     var pass = document.getElementById("signinPASS").value;
     console.log("hello");
     firebase.auth().signInWithEmailAndPassword(email, pass).then(function() {
-        window.location.pathname = '/ProjectCrossComm/chatlayout.html'
+        window.location.pathname = 'ChatLayout.html'
     }).catch((error) => {
         console.log(error.message);
         console.log(error.code);
@@ -48817,7 +48817,7 @@ function googleSignIn() {
             console.log(error.message);
             console.log(error.code);
         });
-        window.location.pathname = '/ProjectCrossComm/chatlayout.html'
+        window.location.pathname = 'ChatLayout.html'
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
@@ -48846,7 +48846,7 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid) {
         console.log(error.message);
         console.log(error.code);
     });
-    window.location.pathname = '/ProjectCrossComm/chatlayout.html'
+    window.location.pathname = 'ChatLayout.html'
 }
 
 
