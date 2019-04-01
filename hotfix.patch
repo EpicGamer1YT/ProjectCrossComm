@@ -1,0 +1,57 @@
+Index: bundledSIGNUP.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- bundledSIGNUP.js	(date 1554120125000)
++++ bundledSIGNUP.js	(date 1554122211687)
+@@ -48836,7 +48836,7 @@
+         "uid": uuid,
+     }).then( () => {
+         console.log("emailConv push complete.");
+-        window.location.pathname = '/ProjectCrossComm/chatlayout.html';
++        window.location.pathname = 'ProjectCrossComm/chatlayout.html';
+     }).catch( (error) => {
+         console.log(error.message);
+         console.log(error.code);
+Index: bundledCHATJS.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- bundledCHATJS.js	(date 1554120125000)
++++ bundledCHATJS.js	(date 1554122051227)
+@@ -4,7 +4,7 @@
+ Javascript is a monstrosity to write, and most of this hurt me to read and write.
+ Please bear this in mind as you continue.
+  */
+-require("firebase"); //Node functions with Browserify to bundle required modules
++const firebase = require("firebase"); //Node functions with Browserify to bundle required modules
+ var config = {
+     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
+     authDomain: "projectcrosscomm.firebaseapp.com",
+Index: bundledSIGNIN.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- bundledSIGNIN.js	(date 1554120125000)
++++ bundledSIGNIN.js	(date 1554122212442)
+@@ -48800,7 +48800,7 @@
+     var pass = document.getElementById("signinPASS").value;
+     console.log("hello");
+     firebase.auth().signInWithEmailAndPassword(email, pass).then(function() {
+-        window.location.pathname = '/ProjectCrossComm/chatlayout.html'
++        window.location.pathname = 'ProjectCrossComm/chatlayout.html'
+     }).catch((error) => {
+         console.log(error.message);
+         console.log(error.code);
+@@ -48846,7 +48846,7 @@
+         console.log(error.message);
+         console.log(error.code);
+     });
+-    window.location.pathname = '/ProjectCrossComm/chatlayout.html'
++    window.location.pathname = 'ProjectCrossComm/chatlayout.html'
+ }
+ 
+ 
