@@ -1,0 +1,1 @@
+[2019.04.02 14:51] Added log.txt and notes.txt
