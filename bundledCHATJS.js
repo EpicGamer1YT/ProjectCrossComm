@@ -46,6 +46,14 @@ function searchEmails(email) { //Function searches database for requested email
         username = (snapshot.val() && snapshot.val().name);
         remoteEmail = (snapshot.val() && snapshot.val().email);
         console.log(snapshot.val());
+        console.log("Here");
+        console.log(snapshot.val());
+        if (snapshot.val() != null) {
+            console.log(email);
+            return email;
+        } else {
+            return "No emails found"
+        }
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
@@ -59,6 +67,7 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
 
     } else {
+        console.log(returnEmail);
         // noinspection JSJQueryEfficiency
         $("#listHere").append("Users found:"); //Adds to value of node
         // noinspection JSJQueryEfficiency
