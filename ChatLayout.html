@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="ChatLayoutStyleSheet.css">
     <title>ChatLayout</title>
@@ -21,18 +22,16 @@
     <div class = center2>Display Text Here</div>
 
     <div class= center>
-        <form id="chatInput">
+
             <label for="sendmessage" id="messageLabel">Send Message</label>
             <input id="sendmessage" type="text" name="Type" placeholder="Type Here"><br>
-            <input type="submit" value="Send" onclick="sendMessage()">
-        </form>
+            <button type="submit" value="Send" onclick="sendMessage()">
     </div>
     <div id="newchat">
-        <form id="findNewChat" class="findChat">
             <label for="findEmail" class="findChat">Search Emails</label>
             <input id="findEmail" type="email" class="findChat">
-            <input id="findEmailSubmit" class="findChat" onclick="parseSearchedEmails()" type="submit">
-        </form>
+            <input id="findEmailSubmit" class="findChat" onclick="//parseSearchedEmails()" type="submit">
+
         <a id="listHere" href=""></a>
         <!-- ENCRYPTION PASSPHRASE INPUT REMOVED. DO NOT ADD THAT BACK. THANK YOU. -->
     </div>
