@@ -1,0 +1,7 @@
+NOTE TO OTHERS ON THIS SERVER
+
+
+Here is where notes about server changes are made. log.txt is where logs will be kept.
+
+
+

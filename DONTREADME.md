@@ -21,7 +21,7 @@ freshman Computer Science education. It fulfills its purpose, and so much more.
 ***
 ##### What is Quetzal?
 Quetzal is a secure chat application designed for web and mobile interfaces. You will find  
-the web interface at [our website](https://quetzal.cf/ "Our Website"), and the mobile application on the Google Play Store  
+the web interface at [our website](https://quetzal.cf/ "Our Website"), [DIRECT LINK](http://35.237.109.80/) and the mobile application on the Google Play Store  
 as well as [our mobile branch](https://github.com/EpicGamer1YT/ProjectCrossComm/tree/khalua "Mobile Branch")  
 ***
 #### Bug Reports:
