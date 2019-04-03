@@ -41,6 +41,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 document.getElementById("findEmailSubmit").addEventListener("click", parseSearchedEmails)
 function searchEmails(email) { //Function searches database for requested email
     var username;
+    var nully = true;
     database.ref("/users/emailConv/" + email).once('value', (snapshot) => {
         target = snapshot.val();
         username = (snapshot.val() && snapshot.val().name);
@@ -48,24 +49,30 @@ function searchEmails(email) { //Function searches database for requested email
         console.log(snapshot.val());
         console.log("Here");
         console.log(snapshot.val());
-        if (snapshot.val() != null) {
-            console.log(email);
-            return email;
+        if (snapshot.val() === null) {
+            console.log("null");
+            nully = true;
         } else {
-            return "No emails found"
+            nully = false;
         }
     }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
     });
+    if (nully) {
+        console.log("null");
+        return "No emails found";
+    } else {
+        return email;
+    }
 }
 function parseSearchedEmails() { //Function calls searchEmails and parses value; allows user to start chat
     var email = document.getElementById("findEmail").value;
     var modifiedEmail = email.replace(/\./g, ",");
     returnEmail = searchEmails(modifiedEmail);
     if (returnEmail === "No emails found") {
+        console.log("here");
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
-
     } else {
         console.log(returnEmail);
         // noinspection JSJQueryEfficiency
