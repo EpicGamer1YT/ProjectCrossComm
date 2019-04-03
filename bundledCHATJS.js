@@ -134,7 +134,7 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
  * if the user already has a keypair, it passes that one off to the chat.
  */
 function generateKeyPair() {
-    var position = database.ref("/users/emailConv/" + local.email.replace(/\./g, "") + "/chats/" + targetUID).once();
+    var position = database.ref("/users/emailConv/" + .replace(/\./g, "") + "/chats/" + targetUID).once(); //FIXME: error: cannot read property of undefined: local.email.replace
     if (position.equals("true")) {
 
         database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + localuuid + "/").set({
@@ -190,6 +190,7 @@ function generateKeyPair() {
 
 }
 //SPLITTER AND ENCRYPTION KEY REMOVED
+document.getElementById("messageSubmit").addEventListener("click", sendMessage);
 function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
     var date = new Date();
     var timestamp = date.getTime();
