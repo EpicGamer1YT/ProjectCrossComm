@@ -1962,7 +1962,7 @@ SecureRandom.prototype.nextBytes = rng_get_bytes;
 *
 **/
 
-var crypto = require('crypto');
+var crypto = require('crypto-js');
  
 function SHA256(s){
 	return crypto.createHash('sha256').update(s, 'utf8').digest('hex');
