@@ -134,7 +134,8 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
  * if the user already has a keypair, it passes that one off to the chat.
  */
 function generateKeyPair() {
-    var position = database.ref("/users/emailConv/" + .replace(/\./g, "") + "/chats/" + targetUID).once(); //FIXME: error: cannot read property of undefined: local.email.replace
+    var localemail = firebase.auth().currentUser.email
+    var position = database.ref("/users/emailConv/" + localemail.replace(/\./g, "") + "/chats/" + targetUID).once('value'); //FIXME: error: cannot read property of undefined: local.email.replace
     if (position.equals("true")) {
 
         database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + localuuid + "/").set({
@@ -145,7 +146,7 @@ function generateKeyPair() {
             console.log(error.message);
             console.log(error.code);
         });
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once().then( (snapshot) => {
+        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once('value',  (snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
                 var bits = 1024;
@@ -169,7 +170,7 @@ function generateKeyPair() {
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " +localuuid + "/" + localuuid).once().then( (snapshot) => {
+        database.ref("/chats/" + targetUID + " " +localuuid + "/" + localuuid).once('value',(snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
                 var bits = 1024;
@@ -195,8 +196,8 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
     var date = new Date();
     var timestamp = date.getTime();
     var localEmail = firebase.auth().currentUser().email;
-    var position = database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once();
-    if (position) {
+    var position = database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value');
+    if (position === "true") {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
             "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
             "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
@@ -238,12 +239,12 @@ window.onload = function () {
         }
     });
     var position;
-    database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value', function(snapshot){
+    database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value', (snapshot) => {
         if (snapshot != null) {
             position = snapshot.val();
         }
     });
-    if (position) {
+    if (position === "true") {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
