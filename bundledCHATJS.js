@@ -24,7 +24,7 @@ var userkey;
 var remoteEmail;
 var target;
 var local;
-var localuuid;
+var localuuid = firebase.auth().currentUser.uid; //FIXME: Property firebase.auth().currentUser read as null
 var targetUID;
 var returnEmail;
 firebase.auth().onAuthStateChanged(function(user) {
@@ -268,8 +268,8 @@ document.getElementById("messageSubmit").addEventListener("click", sendMessage);
 function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
     var date = new Date();
     var timestamp = date.getTime();
-    var localEmail = firebase.auth().currentUser().email;
-    var position = database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value');
+    var localEmail = firebase.auth().currentUser.email;
+    var position = database.ref("/users/emailConv/" + localEmail.replace(/\./g, ",") + "/chats/" + targetUID).once('value');
     if (position === "true") {
         database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
             "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
