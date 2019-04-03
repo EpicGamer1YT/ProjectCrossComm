@@ -37,29 +37,25 @@ firebase.auth().onAuthStateChanged(function(user) {
 // No user is signed in.
     }
 });
+
+document.getElementById("findEmailSubmit").addEventListener("click", parseSearchedEmails)
 function searchEmails(email) { //Function searches database for requested email
     var username;
-    database.ref("/users/emailConv/" + email).once().then( (snapshot) => {
-        //On completion
+    database.ref("/users/emailConv/" + email).once('value', (snapshot) => {
         target = snapshot.val();
         username = (snapshot.val() && snapshot.val().name);
-        remoteEmail  = (snapshot.val() && snapshot.val().email);
+        remoteEmail = (snapshot.val() && snapshot.val().email);
         console.log(snapshot.val());
-    }).catch((error)  => {
+    }).catch( (error) => {
         console.log(error.message);
         console.log(error.code);
     });
-    if (remoteEmail.equals(email)) {
-        return remoteEmail;
-    } else {
-        return "No emails found";
-    }
 }
 function parseSearchedEmails() { //Function calls searchEmails and parses value; allows user to start chat
     var email = document.getElementById("findEmail").value;
     var modifiedEmail = email.replace(/\./g, ",");
     returnEmail = searchEmails(modifiedEmail);
-    if (returnEmail.equals("No emails found")) {
+    if (returnEmail === "No emails found") {
         document.getElementById("listHere").value = "No users of that name found."; //replaces value of node
 
     } else {
