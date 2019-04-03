@@ -136,7 +136,7 @@ function startChat(user, userkey, userPubKey) { //Will start an encrypted chat b
 function generateKeyPair() {
     var localemail = firebase.auth().currentUser.email
     var position = database.ref("/users/emailConv/" + localemail.replace(/\./g, "") + "/chats/" + targetUID).once('value'); //FIXME: error: cannot read property of undefined: local.email.replace
-    if (position.equals("true")) {
+    if (position ==="true") {
 
         database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + localuuid + "/").set({
             "accepted": "true",
