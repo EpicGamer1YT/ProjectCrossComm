@@ -83,17 +83,18 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
             console.log("here");
             document.getElementById("listHere").value = "No users of that name found.";
         } else {
-            console.log(returnEmail);
+            console.log(email);
             // noinspection JSJQueryEfficiency
+            $("#chatName").text("Chatting with " + snapshot.val()["name"]);
             $("#listHere").append("Users found:"); //Adds to value of node
             // noinspection JSJQueryEfficiency
-            $("#listHere").append(returnEmail); //Adds to value of node
+            $("#listHere").append(email); //Adds to value of node
             // noinspection JSJQueryEfficiency
             $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickable to start chat
             // noinspection JSJQueryEfficiency
             $("#listHere").attr("onclick", "generateKeyPair()"); //Should set the onclick to run all necessary chat functions
 
-            generateKeyPair(); //Pass
+            generateKeyPair(email, snapshot.val()['name']); //Pass
         }
     }).catch( (error) => {
         console.log(error.message);
@@ -102,85 +103,157 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
 
 }
 
-function startChat(user, userkey, userPubKey) { //Will start an encrypted chat between two users FIXME: Needs rewriting
-    target = database.ref("/users/emailConv/" + returnEmail).once();
-    targetUID = target.uid;
-    var localUID = firebase.auth().currentUser().uid;
-    var position = database.ref()
-    var accepted = database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + targetUID + "/").once();
-    if (accepted.equals("true")) {
-        //continue as normal
-    } else {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + targetUID + "/").set({
-            "accepted": "false",
-        }).then( () => {
-            console.log("Other user has not yet accepted the chat. Set their flag to \"false\".");
+async function startChat(user, userkey, userPubKey, oUID, position) { //Will start an encrypted chat between two users FIXME: Needs rewriting
+    targetUID = oUID;
+    var localUID = user.uid;
+    console.log(position);
+    var order = position === "true" ? localUID + " " + targetUID : targetUID + " " + localUID;
+    console.log(order);
+    var accepted;
+    await database.ref("/chats/" + order + "/accepted/" + targetUID + "/").once('value', function(snapshot) {
+        if(snapshot.val() != null) {
+            accepted = snapshot.val();
+        }
+    });
+    if (accepted === "true") {
+        database.ref("/chats/" + order + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
+            var newpost = data.val();
+            console.log(newpost);
+            Object.keys(newpost).sort();
+            console.log(newpost);
+            const ordered = Object.keys(newpost).sort();
+            // Object.keys(newpost).map((key, index) => {
+            //
+            //
+            // }).catch( (error) => {
+            //     console.log(error.message);
+            //     console.log(error.code);
+            // });
+            console.log(newpost['message']); //{Prints encrypted message(all messages looped)
+            console.log(newpost['date']);//Prints date stamp(all messages looped)
+            console.log(newpost['time']);//Prints time stamp(all messages looped)
+            console.log(newpost['sender']);//Prints sender uid(all messages looped)
+            //var decrypt = cryptico.decrypt(newpost['message'], userkey).plaintext;
+
+            // noinspection JSJQueryEfficiency
+            $("#chatField").append("<span>" + newpost['sender'] + "</span>");
+            // noinspection JSJQueryEfficiency
+            $("#chatField").append("<span>" + newpost['time'] + "</span>");
+            // noinspection JSJQueryEfficiency
+            $("#chatField").append("<span>" + newpost['message'] + "</span>");
         }).catch( (error) => {
             console.log(error.message);
             console.log(error.code);
         });
+    } else {
+        var myRef = firebase.database().ref("/chats/" + order + "/accepted/" + oUID).set("false");
     }
-    database.ref("/chats/" + localUID + " " + targetUID + "/" + localUID + "/pubkey").set({
-        "pubkey": userPubKey.toString(), //Pushes public key string to database.
-        "privkey": userkey.toString(),
-    }).catch(function(error) {
-        console.log(error.message);
-        console.log(error.code);
-    });
+    // database.ref("/chats/" + order + "/" + localUID + "/").set({
+    //     "pubkey": userPubKey.toString(), //Pushes public key string to database.
+    //     "privkey": userkey.toString(),
+    // }).catch(function(error) {
+    //     console.log(error.message);
+    //     console.log(error.code);
+    // });
 }
 
 /**
  * uses Cryptico.js to generate a public/private keypair
  * if the user already has a keypair, it passes that one off to the chat.
  */
-function generateKeyPair() {
+async function generateKeyPair(email, name) {
     var localemail = firebase.auth().currentUser.email
-    var position = database.ref("/users/emailConv/" + localemail.replace(/\./g, "") + "/chats/" + targetUID).once('value'); //FIXME: error: cannot read property of undefined: local.email.replace
+    var oUID;
+    await database.ref("/users/emailConv/" + email.replace(/\./g, ",") + "/uid/").once('value', function(snap) {
+        if (snap.val() != null) {
+            oUID = snap.val();
+        }
+    });
+    var position;
+    await database.ref("/users/emailConv/" + localemail.replace(/\./g, ",") + "/chats/" + oUID).once('value', function(snap) {
+        if (snap.val() != null) {
+            position = snap.val();
+            console.log(position);
+        }
+    }); //FIXME: error: cannot read property of undefined: local.email.replace
     if (position ==="true") {
 
-        database.ref("/chats/" + localuuid + " " + targetUID + "/accepted/" + localuuid + "/").set({
-            "accepted": "true",
-        }).then( () => {
-            console.log("Set accepted flag for local client to \"true\".");
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid).once('value',  (snapshot) => {
+        var myRef = firebase.database().ref("/chats/" + localUUID + " " + oUID + "/accepted/" + localuuid).set("true");
+
+        database.ref("/chats/" + localuuid + " " + oUID + "/" + localuuid).once('value',  (snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
                 var bits = 1024;
                 userkeynew = cryptico.generateRSAKey(passPhrase, bits);
                 var userPubKeynew = cryptico.publicKeyString(userkeynew);
-                database.ref("/chats/" + localUID + " " + targetUID + "/" + localUID + "/privkey").set({
+                database.ref("/chats/" + localUID + " " + oUID + "/" + localUID + "/privkey").set({
                     "privkey": cryptico.privateKey(userkeynew).toString,
                     "pubkey": userPubKeynew.toString(),
                 }).catch(function(error) {
                     console.log(error.message);
                     console.log(error.code);
                 });
-                startChat(firebase.auth().currentUser(), userkeynew, userPubKeynew);
+                startChat(firebase.auth().currentUser(), userkeynew, userPubKeynew, name);
             } else {
-                var userkey = snapshot.val().privkey;
-                var userPubKey = snapshot.val().pubKey;
-                startChat(firebase.auth().currentUser(), userkey, userPubKey);
+                var userkey = snapshot.val()["privKey"];
+                var userPubKey = snapshot.val()["pubKey"];
+                startChat(firebase.auth().currentUser(), userkey, userPubKey, name);
             }
         }).catch( (error) => {
             console.log(error.message);
             console.log(error.code);
         });
-    } else {
+    } else if (position === "false"){
+        var myRef = firebase.database().ref("/chats/" + oUID + " " + localuuid + "/accepted/" + localuuid).set("true");
+
+        var pubKey;
+        var privKey;
+        await database.ref("/chats/" + oUID + " " + localuuid + "/" + localuuid + "/privKey").once('value',  (snapshot) => {
+            console.log(snapshot.val());
+            if (snapshot.val() != null) {
+                privKey = snapshot.val();
+            }
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
+        await database.ref("/chats/" + oUID + " " + localuuid + "/" + localuuid + "/pubKey").once('value',  (snapshot) => {
+            console.log(snapshot.val());
+            if (snapshot.val() != null) {
+                pubKey = snapshot.val();
+            }
+        }).catch( (error) => {
+            console.log(error.message);
+            console.log(error.code);
+        });
+        if (privKey == null || pubKey == null) {
+            var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
+            var bits = 1024;
+            userkeynew = cryptico.generateRSAKey(passPhrase, bits);
+            var userPubKeynew = cryptico.publicKeyString(userkeynew);
+            database.ref("/chats/" + oUID + " " + localuuid + "/" + localUID + "/").set({
+                "privkey": cryptico.privateKey(userkeynew).toString(),
+                "pubkey": userPubKeynew.toString(),
+            }).catch(function(error) {
+                console.log(error.message);
+                console.log(error.code);
+            });
+            startChat(firebase.auth().currentUser, userkeynew, userPubKeynew, oUID, position, name);
+        } else {
+            startChat(firebase.auth().currentUser, privKey, pubKey, oUID, position, name);
+        }
+    }else {
         database.ref("/chats/" + targetUID + " " +localuuid + "/" + localuuid).once('value',(snapshot) => {
             if (typeof snapshot.val().privkey == null) {
                 var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
                 var bits = 1024;
                 userkeynew = cryptico.generateRSAKey(passPhrase, bits);
                 var userPubKeynew = cryptico.publicKeyString(userkeynew);
-                startChat(firebase.auth().currentUser(), userkeynew, userPubKeynew);
+                startChat(firebase.auth().currentUser, userkeynew, userPubKeynew, "true", name);
             } else {
                 var userkey = snapshot.val().privkey;
                 var userPubKey = snapshot.val().pubKey;
-                startChat(firebase.auth().currentUser(), userkey, userPubKey);
+                startChat(firebase.auth().currentUser, userkey, userPubKey, "true", name);
             }
         }).catch( (error) => {
             console.log(error.message);

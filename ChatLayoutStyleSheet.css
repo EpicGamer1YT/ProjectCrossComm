@@ -10,13 +10,21 @@ body {
     color: #ffffff;
 }
 #title {
-    background-color: #ffffff;
+    background-color: #000000;
+    font-family: "Arial", sans-serif;
+    padding: 15px 5px 10px 718px;
+    font-size: 20px;
+    color: white;
+    margin: 0px;
+
+}
+#chatName {
+    background-color: #000000;
     font-family: "Arial", sans-serif;
     padding: 15px 5px 0 718px;
     font-size: 20px;
     color: white;
     margin: 0px;
-
 }
 #type {
     display: block;
