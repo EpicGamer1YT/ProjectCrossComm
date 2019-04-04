@@ -157,11 +157,11 @@ async function startChat(user, userkey, userPubKey, oUID, position, name) { //Wi
                 // var decrypt = await crypt.decrypt(encrypted);
                 // console.log(decrypt);
                 // noinspection JSJQueryEfficiency
-                $("#chatField").append("<p>" + nme + "</p>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<p>" + time + "</p>");
-                // noinspection JSJQueryEfficiency
-                $("#chatField").append("<p>" + msg + "</p>");
+                $("#chatField").append("<p>" + nme + time + msg + "</p>");
+                // // noinspection JSJQueryEfficiency
+                // $("#chatField").append("<p>" + time + "</p>");
+                // // noinspection JSJQueryEfficiency
+                // $("#chatField").append("<p>" + msg + "</p>");
                 //noinspection JSJQueryEfficiency
                 $("#chatField").append("<br>");
             })
