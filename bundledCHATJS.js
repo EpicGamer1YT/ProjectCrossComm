@@ -164,7 +164,7 @@ async function startChat(user, userkey, userPubKey, oUID, position, name) { //Wi
                 $("#chatField").append("<span>" + msg + "</span>");
             })
         } else {
-            var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + oUID).set("false");
+            var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + oUID).set("true");
         }
     }
     // database.ref("/chats/compTemp/" + order + "/" + localUID + "/").set({
