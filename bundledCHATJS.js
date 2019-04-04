@@ -24,7 +24,14 @@ var userkey;
 var remoteEmail;
 var target;
 var local;
-var localuuid = firebase.auth().currentUser.uid; //FIXME: Property firebase.auth().currentUser read as null
+var localuuid;
+firebase.auth().onAuthStateChanged( (user) => {
+    if (user) {
+        localuuid = user.uid;
+    } else {
+        alert("You are not signed in.")
+    }
+});
 var targetUID;
 var returnEmail;
 firebase.auth().onAuthStateChanged(function(user) {
@@ -90,8 +97,6 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
             // noinspection JSJQueryEfficiency
             $("#listHere").append(email); //Adds to value of node
             // noinspection JSJQueryEfficiency
-            $("#listHere").attr("href", "javascript:void(0)"); //Should change the text to be clickable to start chat
-            // noinspection JSJQueryEfficiency
             $("#listHere").attr("onclick", "generateKeyPair()"); //Should set the onclick to run all necessary chat functions
 
             generateKeyPair(email, snapshot.val()['name']); //Pass
@@ -102,7 +107,7 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
     });
 
 }
-
+document.getElementById("listHere").addEventListener("click", startChat);
 async function startChat(user, userkey, userPubKey, oUID, position) { //Will start an encrypted chat between two users FIXME: Needs rewriting
     targetUID = oUID;
     var localUID = user.uid;
@@ -264,7 +269,7 @@ async function generateKeyPair(email, name) {
 
 }
 //SPLITTER AND ENCRYPTION KEY REMOVED
-document.getElementById("messageSubmit").addEventListener("click", sendMessage);
+document.getElementById("messageSubmit").addEventListener("click", sendMessage());
 function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
     var date = new Date();
     var timestamp = date.getTime();
