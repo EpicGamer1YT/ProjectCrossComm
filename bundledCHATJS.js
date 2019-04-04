@@ -157,11 +157,13 @@ async function startChat(user, userkey, userPubKey, oUID, position, name) { //Wi
                 // var decrypt = await crypt.decrypt(encrypted);
                 // console.log(decrypt);
                 // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + nme + "</span>");
+                $("#chatField").append("<p>" + nme + "</p>");
                 // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + time + "</span>");
+                $("#chatField").append("<p>" + time + "</p>");
                 // noinspection JSJQueryEfficiency
-                $("#chatField").append("<span>" + msg + "</span>");
+                $("#chatField").append("<p>" + msg + "</p>");
+                //noinspection JSJQueryEfficiency
+                $("#chatField").append("<br>");
             })
         } else {
             var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + oUID).set("true");
