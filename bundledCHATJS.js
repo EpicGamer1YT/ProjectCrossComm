@@ -27,6 +27,8 @@ var local;
 var localuuid;
 var targetUID;
 var returnEmail;
+var crypt = new JSEncrypt();
+// var rsa = new RSA();
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         localuuid = user.uid;
@@ -68,6 +70,7 @@ function searchEmails(email) { //Function searches database for requested email
         //return email;
     }
 }
+
 function parseSearchedEmails() { //Function calls searchEmails and parses value; allows user to start chat
     var email = document.getElementById("findEmail").value;
     var modifiedEmail = email.replace(/\./g, ",");
@@ -103,52 +106,68 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
 
 }
 
-async function startChat(user, userkey, userPubKey, oUID, position) { //Will start an encrypted chat between two users FIXME: Needs rewriting
+async function startChat(user, userkey, userPubKey, oUID, position, name) { //Will start an encrypted chat between two users FIXME: Needs rewriting
     targetUID = oUID;
     var localUID = user.uid;
     console.log(position);
     var order = position === "true" ? localUID + " " + targetUID : targetUID + " " + localUID;
     console.log(order);
     var accepted;
-    await database.ref("/chats/" + order + "/accepted/" + targetUID + "/").once('value', function(snapshot) {
-        if(snapshot.val() != null) {
-            accepted = snapshot.val();
-        }
-    });
-    if (accepted === "true") {
-        database.ref("/chats/" + order + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
-            var newpost = data.val();
-            console.log(newpost);
-            Object.keys(newpost).sort();
-            console.log(newpost);
-            const ordered = Object.keys(newpost).sort();
-            // Object.keys(newpost).map((key, index) => {
-            //
-            //
-            // }).catch( (error) => {
-            //     console.log(error.message);
-            //     console.log(error.code);
-            // });
-            console.log(newpost['message']); //{Prints encrypted message(all messages looped)
-            console.log(newpost['date']);//Prints date stamp(all messages looped)
-            console.log(newpost['time']);//Prints time stamp(all messages looped)
-            console.log(newpost['sender']);//Prints sender uid(all messages looped)
-            //var decrypt = cryptico.decrypt(newpost['message'], userkey).plaintext;
-
-            // noinspection JSJQueryEfficiency
-            $("#chatField").append("<span>" + newpost['sender'] + "</span>");
-            // noinspection JSJQueryEfficiency
-            $("#chatField").append("<span>" + newpost['time'] + "</span>");
-            // noinspection JSJQueryEfficiency
-            $("#chatField").append("<span>" + newpost['message'] + "</span>");
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
+    var localNme;
+    if (typeof position != null) {
+        await database.ref("/chats/compTemp/" + order + "/accepted/" + targetUID + "/").once('value', function (snapshot) {
+            if (snapshot.val() != null) {
+                accepted = snapshot.val();
+            }
         });
-    } else {
-        var myRef = firebase.database().ref("/chats/" + order + "/accepted/" + oUID).set("false");
+        if (accepted === "true") {
+            $("#chatField").text("")
+            database.ref("/chats/compTemp/" + order + "/" + localuuid + "/messages/").on("child_added", async (data, prevChildKey) => {
+                var newpost = data.val();
+                console.log(newpost);
+                Object.keys(newpost).sort();
+                console.log(newpost);
+                const ordered = Object.keys(newpost).sort();
+                // Object.keys(newpost).map((key, index) => {
+                //
+                //
+                // }).catch( (error) => {
+                //     console.log(error.message);
+                //     console.log(error.code);
+                // });
+                console.log(newpost['message']); //{Prints encrypted message(all messages looped)
+                console.log(newpost['date']);//Prints date stamp(all messages looped)
+                console.log(newpost['time']);//Prints time stamp(all messages looped)
+                console.log(newpost['sender']);//Prints sender uid(all messages looped)
+                var nme; //name to use for msg
+                if (newpost['sender'] === localUID) {
+                    nme = user.displayName
+                } else {
+                    nme = name
+                }
+                nme = nme + " at "
+                var time = newpost['time'] + ": "
+                var msg = newpost['message'] + "\n";
+                // crypt.setPublicKey(userPubKey);
+                // console.log(userPubKey);
+                // var encrypted = await crypt.encrypt("HI");
+                // console.log(encrypted);
+                // console.log(userkey);
+                // crypt.setPrivateKey(userkey);
+                // var decrypt = await crypt.decrypt(encrypted);
+                // console.log(decrypt);
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + nme + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + time + "</span>");
+                // noinspection JSJQueryEfficiency
+                $("#chatField").append("<span>" + msg + "</span>");
+            })
+        } else {
+            var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + oUID).set("false");
+        }
     }
-    // database.ref("/chats/" + order + "/" + localUID + "/").set({
+    // database.ref("/chats/compTemp/" + order + "/" + localUID + "/").set({
     //     "pubkey": userPubKey.toString(), //Pushes public key string to database.
     //     "privkey": userkey.toString(),
     // }).catch(function(error) {
@@ -162,53 +181,29 @@ async function startChat(user, userkey, userPubKey, oUID, position) { //Will sta
  * if the user already has a keypair, it passes that one off to the chat.
  */
 async function generateKeyPair(email, name) {
-    var localemail = firebase.auth().currentUser.email
+    var localemail = firebase.auth().currentUser.email;
     var oUID;
+    var localuuid = firebase.auth().currentUser.uid;
     await database.ref("/users/emailConv/" + email.replace(/\./g, ",") + "/uid/").once('value', function(snap) {
         if (snap.val() != null) {
             oUID = snap.val();
         }
     });
     var position;
-    await database.ref("/users/emailConv/" + localemail.replace(/\./g, ",") + "/chats/" + oUID).once('value', function(snap) {
+    await database.ref("/users/emailConv/" + localemail.replace(/\./g, ",") + "/compTemp/" + oUID).once('value', function(snap) {
         if (snap.val() != null) {
             position = snap.val();
             console.log(position);
         }
     }); //FIXME: error: cannot read property of undefined: local.email.replace
-    if (position ==="true") {
-
-        var myRef = firebase.database().ref("/chats/" + localUUID + " " + oUID + "/accepted/" + localuuid).set("true");
-
-        database.ref("/chats/" + localuuid + " " + oUID + "/" + localuuid).once('value',  (snapshot) => {
-            if (typeof snapshot.val().privkey == null) {
-                var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
-                var bits = 1024;
-                userkeynew = cryptico.generateRSAKey(passPhrase, bits);
-                var userPubKeynew = cryptico.publicKeyString(userkeynew);
-                database.ref("/chats/" + localUID + " " + oUID + "/" + localUID + "/privkey").set({
-                    "privkey": cryptico.privateKey(userkeynew).toString,
-                    "pubkey": userPubKeynew.toString(),
-                }).catch(function(error) {
-                    console.log(error.message);
-                    console.log(error.code);
-                });
-                startChat(firebase.auth().currentUser(), userkeynew, userPubKeynew, name);
-            } else {
-                var userkey = snapshot.val()["privKey"];
-                var userPubKey = snapshot.val()["pubKey"];
-                startChat(firebase.auth().currentUser(), userkey, userPubKey, name);
-            }
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
-    } else if (position === "false"){
-        var myRef = firebase.database().ref("/chats/" + oUID + " " + localuuid + "/accepted/" + localuuid).set("true");
+    var order = position === "true" ? localuuid + " " + oUID : oUID + " " + localuuid;
+    console.log(order);
+    if (position ==="true" || position === "false") {
+        var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + localuuid).set("true");
 
         var pubKey;
         var privKey;
-        await database.ref("/chats/" + oUID + " " + localuuid + "/" + localuuid + "/privKey").once('value',  (snapshot) => {
+        await database.ref("/chats/compTemp/" + order + "/" + localuuid + "/privKey").once('value',  (snapshot) => {
             console.log(snapshot.val());
             if (snapshot.val() != null) {
                 privKey = snapshot.val();
@@ -217,7 +212,7 @@ async function generateKeyPair(email, name) {
             console.log(error.message);
             console.log(error.code);
         });
-        await database.ref("/chats/" + oUID + " " + localuuid + "/" + localuuid + "/pubKey").once('value',  (snapshot) => {
+        await database.ref("/chats/compTemp/" + order + "/" + localuuid + "/pubKey").once('value',  (snapshot) => {
             console.log(snapshot.val());
             if (snapshot.val() != null) {
                 pubKey = snapshot.val();
@@ -228,52 +223,78 @@ async function generateKeyPair(email, name) {
         });
         if (privKey == null || pubKey == null) {
             var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
-            var bits = 1024;
+            var bits = 2048;
             userkeynew = cryptico.generateRSAKey(passPhrase, bits);
             var userPubKeynew = cryptico.publicKeyString(userkeynew);
-            database.ref("/chats/" + oUID + " " + localuuid + "/" + localUID + "/").set({
-                "privkey": cryptico.privateKey(userkeynew).toString(),
-                "pubkey": userPubKeynew.toString(),
-            }).catch(function(error) {
-                console.log(error.message);
-                console.log(error.code);
-            });
+            // database.ref("/chats/compTemp/" + order + "/" + localuuid + "/").set({
+            //     "privkey": cryptico.privateKey(userkeynew).toString(),
+            //     "pubkey": userPubKeynew.toString(),
+            // }).catch(function(error) {
+            //     console.log(error.message);
+            //     console.log(error.code);
+            // });
             startChat(firebase.auth().currentUser, userkeynew, userPubKeynew, oUID, position, name);
         } else {
             startChat(firebase.auth().currentUser, privKey, pubKey, oUID, position, name);
         }
-    }else {
-        database.ref("/chats/" + targetUID + " " +localuuid + "/" + localuuid).once('value',(snapshot) => {
-            if (typeof snapshot.val().privkey == null) {
-                var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
-                var bits = 1024;
-                userkeynew = cryptico.generateRSAKey(passPhrase, bits);
-                var userPubKeynew = cryptico.publicKeyString(userkeynew);
-                startChat(firebase.auth().currentUser, userkeynew, userPubKeynew, "true", name);
-            } else {
-                var userkey = snapshot.val().privkey;
-                var userPubKey = snapshot.val().pubKey;
-                startChat(firebase.auth().currentUser, userkey, userPubKey, "true", name);
-            }
-        }).catch( (error) => {
-            console.log(error.message);
-            console.log(error.code);
-        });
+
+    } else {
+        var passPhrase = "Javascript is incredibly inconsistent."; //Is this visible in our code? Yes. Does it matter? No. It's seeded.
+        var bits = 2048;
+        userkeynew = cryptico.generateRSAKey(passPhrase, bits);
+        var userPubKeynew = cryptico.publicKeyString(userkeynew);
+        // database.ref("/chats/compTemp/" + localuuid + " " + oUID + "/" + localuuid + "/").set({
+        //     "privkey": cryptico.privateKey(userkeynew).toString(),
+        //     "pubkey": userPubKeynew.toString(),
+        // }).catch(function(error) {
+        //     console.log(error.message);
+        //     console.log(error.code);
+        // });
+        var myRef = firebase.database().ref("/chats/compTemp/" + localuuid + " " + oUID + "/accepted/" + localuuid).set("true");
+        var myRef = firebase.database().ref("/users/emailConv/" + localemail.replace(/\./g, ",") + "/compTemp/" + oUID).set("true");
+        var myRef = firebase.database().ref("/users/emailConv/" + email.replace(/\./g, ",") + "/compTemp/" + localuuid).set("false")
+        startChat(firebase.auth().currentUser, userkeynew, userPubKeynew, oUID, "true", name);
     }
 
 
 }
 //SPLITTER AND ENCRYPTION KEY REMOVED
 document.getElementById("messageSubmit").addEventListener("click", sendMessage);
-function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
+async function sendMessage() { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'S APPROVAL
     var date = new Date();
+    var user = firebase.auth().currentUser;
     var timestamp = date.getTime();
-    var localEmail = firebase.auth().currentUser().email;
-    var position = database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value');
+    var localEmail = firebase.auth().currentUser.email;
+    var position;
+    var oUID;
+    await database.ref("/users/emailConv/" + localEmail.replace(/\./g, ",") + "/compTemp/" ).once('value', function(snapshot) {
+        if(snapshot.val() != null) {
+            Object.keys(snapshot.val()).map((key, index) => {
+                oUID = key;
+                position = snapshot.val()[key];
+                console.log(oUID);
+                console.log(position);
+            });
+            // oUID = snapshot.val()
+            // position = snapshot.val();
+        }
+    });
+
     if (position === "true") {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/" + timestamp).set({
+        database.ref("/chats/compTemp/" + localuuid + " " + oUID + "/" + localuuid + "/messages/" + timestamp).set({
             "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
-            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            // "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "message": document.getElementById("sendmessage").value,
+            "sender": localuuid,
+            "time": date.getHours() + "." + date.getMinutes(),
+        }).catch(function(error) {
+            console.log(error.message);
+            console.log(error.code);
+        });
+        database.ref("/chats/compTemp/" + localuuid + " " + oUID + "/" + oUID + "/messages/" + timestamp).set({
+            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
+            // "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "message": document.getElementById("sendmessage").value,
             "sender": localuuid,
             "time": date.getHours() + "." + date.getMinutes(),
         }).catch(function(error) {
@@ -281,9 +302,20 @@ function sendMessage(user, userPubKey, userkey) { //TEMPORARY. NOT TO BE IMPLEME
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/" + timestamp).set({
+        database.ref("/chats/compTemp/" + oUID + " " + localuuid + "/" + localuuid + "/messages/" + timestamp).set({
             "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
-            "message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            //"message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "message": document.getElementById("sendmessage").value,
+            "sender": localuuid,
+            "time": date.getHours() + "." + date.getMinutes(),
+        }).catch(function(error) {
+            console.log(error.message);
+            console.log(error.code);
+        });
+        database.ref("/chats/compTemp/" + oUID + " " + localuuid + "/" + oUID + "/messages/" + timestamp).set({
+            "date": date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate(),
+            //"message": cryptico.encrypt(document.getElementById("sendmessage").value, userPubKey).cipher,
+            "message": document.getElementById("sendmessage").value,
             "sender": localuuid,
             "time": date.getHours() + "." + date.getMinutes(),
         }).catch(function(error) {
@@ -312,13 +344,13 @@ window.onload = function () {
         }
     });
     var position;
-    database.ref("/users/emailConv/" + localEmail + "/chats/" + targetUID).once('value', (snapshot) => {
+    database.ref("/users/emailConv/" + localEmail + "/compTemp/" + targetUID).once('value', (snapshot) => {
         if (snapshot != null) {
             position = snapshot.val();
         }
     });
     if (position === "true") {
-        database.ref("/chats/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
+        database.ref("/chats/compTemp/" + localuuid + " " + targetUID + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
             Object.keys(newpost).sort();
@@ -347,7 +379,7 @@ window.onload = function () {
             console.log(error.code);
         });
     } else {
-        database.ref("/chats/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
+        database.ref("/chats/compTemp/" + targetUID + " " + localuuid + "/" + localuuid + "/messages/").on("child_added", (data, prevChildKey) => {
             var newpost = data.val();
             console.log(newpost);
             Object.keys(newpost).sort();
@@ -27457,7 +27489,7 @@ var DbTargetGlobal = /** @class */ (function () {
 }());
 /**
  * An object representing an association between a Collection id (e.g. 'messages')
- * to a parent path (e.g. '/chats/123') that contains it as a (sub)collection.
+ * to a parent path (e.g. '/chats/compTemp/123') that contains it as a (sub)collection.
  * This is used to efficiently find all collections to query when performing
  * a Collection Group query.
  */

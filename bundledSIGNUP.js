@@ -48806,6 +48806,14 @@ function signUpWithEmail() {
         var user = firebase.auth().currentUser;
         var uidvalue = user.uid;
         console.log(uidvalue);
+        user.updateProfile({
+            displayName: username,
+        }).then(function() {
+            var displayName = user.displayName;
+        }, function(error) {
+            console.log(error.message);
+        });
+
         writeUserDataFromEmailSignIn(email, username, uidvalue);
     }).catch((error) => {
         alert(error.message);
