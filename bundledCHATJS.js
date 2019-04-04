@@ -266,17 +266,18 @@ async function sendMessage() { //TEMPORARY. NOT TO BE IMPLEMENTED WITHOUT TEJAS'
     var timestamp = date.getTime();
     var localEmail = firebase.auth().currentUser.email;
     var position;
-    var oUID;
-    await database.ref("/users/emailConv/" + localEmail.replace(/\./g, ",") + "/compTemp/" ).once('value', function(snapshot) {
+    var oUID = targetUID;
+    await database.ref("/users/emailConv/" + localEmail.replace(/\./g, ",") + "/compTemp/" + targetUID).once('value', function(snapshot) {
         if(snapshot.val() != null) {
-            Object.keys(snapshot.val()).map((key, index) => {
-                oUID = key;
-                position = snapshot.val()[key];
-                console.log(oUID);
-                console.log(position);
-            });
+            // Object.keys(snapshot.val()).map((key, index) => {
+            //     oUID = key;
+            //     position = snapshot.val()[key];
+            //     console.log(oUID);
+            //     console.log(position);
+            // });
             // oUID = snapshot.val()
-            // position = snapshot.val();
+            console.log(snapshot.val());
+            position = snapshot.val();
         }
     });
 
