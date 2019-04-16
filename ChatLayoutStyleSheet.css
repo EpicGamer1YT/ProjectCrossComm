@@ -84,3 +84,27 @@ li a {
 li a:hover {
     background-color: #111;
 }
+#chatField {
+    height: 100px;
+    width: 800px;
+    overflow: scroll;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #333333;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #444444;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

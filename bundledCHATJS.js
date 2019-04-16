@@ -89,6 +89,7 @@ function parseSearchedEmails() { //Function calls searchEmails and parses value;
             console.log(email);
             // noinspection JSJQueryEfficiency
             $("#chatName").text("Chatting with " + snapshot.val()["name"]);
+            document.getElementById("listHere").innerHTML = ""; //Should reset value of node
             $("#listHere").append("Users found:"); //Adds to value of node
             // noinspection JSJQueryEfficiency
             $("#listHere").append(email); //Adds to value of node
@@ -169,6 +170,7 @@ async function startChat(user, userkey, userPubKey, oUID, position, name) { //Wi
             var myRef = firebase.database().ref("/chats/compTemp/" + order + "/accepted/" + oUID).set("true");
         }
     }
+    
     // database.ref("/chats/compTemp/" + order + "/" + localUID + "/").set({
     //     "pubkey": userPubKey.toString(), //Pushes public key string to database.
     //     "privkey": userkey.toString(),

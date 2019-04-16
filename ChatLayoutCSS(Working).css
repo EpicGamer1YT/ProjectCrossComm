@@ -52,3 +52,6 @@ h3{
 #findEmailSubmit{
     margin-left: 0%;
 }
+#chatField {
+    height: 150px;
+}

@@ -48782,7 +48782,10 @@ var __importDefault;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],103:[function(require,module,exports){
-const firebase = require("firebase"); //Required to link with Firebase
+        /**
+         * OUR CODE BEGINS HERE
+         */
+        const firebase = require("firebase"); //Required to link with Firebase
 var config = {
     apiKey: "AIzaSyAhglAXFWaJhtvOrfeugAMgJHrBw5CUNEc",
     authDomain: "projectcrosscomm.firebaseapp.com",
@@ -48846,8 +48849,12 @@ function writeToDatabaseFromGoogleSignIn(email, username, uuid) {
         console.log(error.message);
         console.log(error.code);
     });
-    window.location.pathname = 'ChatLayout.html'
+    window.location.pathname = 'chatlayout.html'
 }
+
+        /**
+         * OUR CODE ENDS HERE
+         */
 
 
 document.getElementById("signinGOOGLEBUTTON").addEventListener("click", googleSignIn); //onclick listener for google
